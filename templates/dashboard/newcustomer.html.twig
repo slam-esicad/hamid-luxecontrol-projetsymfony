@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un nouveau client{% endblock %}
+
+
+{% block body %}
+
+	{{ component('Sidebar') }}
+
+	<div class="ui container">
+		<h1 class="header inika">Création du client</h1>
+
+		<div class="ui form">
+			<form method="POST">
+				<h4 class="ui dividing header">Informations général</h4>
+				<div class="three fields">
+					<div class="field">
+						<label for="name">Nom ou raison sociale</label>
+						<input type="text" name="name" id="name" placeholder="Nom ou raison sociale">
+					</div>
+					<div class="field">
+						<label for="email">Email</label>
+						<input type="email" name="email" id="email" placeholder="Email">
+					</div>
+					<div class="field">
+						<label for="tel">Numéro de téléphone</label>
+						<input type="text" name="phone" id="tel" placeholder="Numéro de téléphone">
+					</div>
+				</div>
+
+				<div class="three fields">
+					<div class="field">
+						<label for="address">Adresse</label>
+						<input type="text" name="address" id="address" placeholder="Adresse">
+					</div>
+
+					<div class="field">
+						<label id="pc">Code Postal</label>
+						<input type="text" name="pc" id="pc" placeholder="Code postal">
+					</div>
+
+					<div class="field">
+						<label for="city">Ville</label>
+						<input type="text" name="city" id="city" placeholder="Ville">
+					</div>
+				</div>
+
+				<div class="two fields">
+					<div class="field">
+						<label for="website">Site web</label>
+						<input type="text" name="website" id="website" placeholder="Site web">
+					</div>
+
+					<div class="field">
+						<label for="rib">RIB</label>
+						<input type="text" name="rib" id="rib" placeholder="RIB">
+					</div>
+				</div>
+
+				<div class="field">
+					<label for="comment">Commentaire</label>
+					<textarea name="comment" id="comment" placeholder="Commentaire personnalisé du client"></textarea>
+				</div>
+
+				<div class="ui checkbox field">
+					<input class="form-pro-check" type="checkbox" name="pro" id="pro">
+					<label for="pro">Pro</label>
+				</div>
+
+				<div class="two fields">
+					<div class="field form-pro-siret">
+						<label for="siret">SIRET</label>
+						<input type="text" name="siret" placeholder="SIRET" id="siret">
+					</div>
+
+					<div class="field form-pro-bic">
+						<label for="bic">BIC</label>
+						<input type="text" name="bic" id="bic" placeholder="BIC">
+					</div>
+				</div>
+
+				<br>
+				<input class="ui teal button" name="sub_new_customer" type="submit" value="Ajouter">
+				<br><br>
+
+			</form>
+		</div>
+	</div>
+
+	<script src="{{ asset('js/app.js') }}"></script>
+
+{% endblock %}

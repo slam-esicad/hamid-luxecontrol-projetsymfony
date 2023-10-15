@@ -1,0 +1,64 @@
+:root {
+    --color-gray: #333333;
+    --color-bg: #EDEDED;
+    --color-red: #C53D45;
+    --color-green: #4BBE4F;
+}
+
+body {
+    background-color: #EDEDED;
+    font-family: "Inter", serif;
+}
+
+.menu-top {
+    border-radius: 0 !important;
+    background-color: #333333 !important;
+    border: none !important;
+    padding-left: 30px !important;
+    z-index: 9999;
+}
+
+.title-top {
+    color: #fff;
+    font-family: 'Italianno', sans-serif;
+    font-size: 40px !important;
+    line-height: 66px;
+    border: none !important;
+}
+
+.title-top:hover{color: #fff}
+.logo {text-align:center;}
+.logo img {height: 200px;}
+.right {float: right;margin:0 !important;}
+.p_sidebar {padding-top:115px;}
+.container {padding-left: 100px;}
+form .login {
+    width: 50%;
+}
+
+
+.p_sidebar {
+    background-color: #333333 !important;
+}
+
+.p_sidebar .item {
+    color: white !important;
+    font-size: 16px;
+    font-family: "Inter", serif !important;
+    border-bottom: 3px solid white;
+}
+
+.icon_card {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.blue {color: #3B70BE;}
+.red {color: #C53D45;}
+.green {color: #4BBE4F !important;}
+.yellow {color: #E8D572;}
+.bold {font-weight: bold !important;}
+.inika {font-family: 'Inika', serif !important;}
+thead .tr-head > th {background-color: var(--color-gray) !important; color: var(--color-bg) !important;}
+.locked { color: var(--color-red); }
+.unlocked { color: var(--color-green) !important; }

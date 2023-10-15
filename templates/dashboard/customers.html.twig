@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+
+{% block body %}
+
+	{{ component('Sidebar') }}
+
+	<div class="ui container">
+		<h1 class="header inika">Liste des clients</h1>
+
+		<a href="{{ path('app_new_customer') }}">
+			<button class="ui teal button">
+				<i class="plus icon"></i>
+				Nouveau
+			</button>
+		</a>
+		<table class="ui celled table">
+			<thead class="tr-head">
+				<tr class="tr-head">
+					<th>Nom ou raison sociale</th>
+					<th>Adresse</th>
+					<th>Code postal</th>
+					<th>Ville</th>
+					<th>Email</th>
+					<th>Téléphone</th>
+					<th>Client PRO</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for customer in customers_list %}
+
+				<tr>
+
+					<td>
+						<a href="{{ path('app_edit_customer', {'code': customer.code}) }}">
+							{{ customer.name }}
+						</a>
+
+					</td>
+
+					<td>{{ customer.address }}</td>
+					<td>{{ customer.pc }}</td>
+					<td>{{ customer.city }}</td>
+					<td>{{ customer.email }}</td>
+					<td>{{ customer.phone }}</td>
+					<td class="ui center">
+						{% if customer.pro %}
+							<i class="fa fa-check"></i>
+						{% else %}
+							<i class="fa fa-xmark"></i>
+						{% endif %}
+					</td>
+				</tr>
+
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+
+{% endblock %}

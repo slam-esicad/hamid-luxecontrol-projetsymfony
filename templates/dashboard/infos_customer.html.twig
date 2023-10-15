@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/menu.min.css">
+
+{% endblock %}
+
+{% block title %}Fiche du client {{ customer.code }}{% endblock %}
+
+
+{% block body %}
+
+	{{ component('Sidebar') }}
+
+	<div class="ui container">
+		<h1 class="header inika"><span class="locker locked"><i class="lock icon"></i></span> Fiche client : {{ customer.code }}</h1>
+
+		<div class="ui form">
+			<form method="POST">
+				<h4 class="ui dividing header">Informations général</h4>
+				<div class="three fields">
+					<div class="field">
+						<label for="name">Nom ou raison sociale</label>
+						<input type="text" name="name" id="name" placeholder="Nom ou raison sociale" value="{{ customer.name }}" disabled>
+					</div>
+					<div class="field">
+						<label for="email">Email</label>
+						<input type="email" name="email" id="email" placeholder="Email" value="{{ customer.email }}" disabled>
+					</div>
+					<div class="field">
+						<label for="tel">Numéro de téléphone</label>
+						<input type="text" name="phone" id="tel" placeholder="Numéro de téléphone" value="{{ customer.phone }}" disabled>
+					</div>
+				</div>
+
+				<div class="three fields">
+					<div class="field">
+						<label for="address">Adresse</label>
+						<input type="text" name="address" id="address" placeholder="Adresse" value="{{ customer.address }}" disabled>
+					</div>
+
+					<div class="field">
+						<label id="pc">Code Postal</label>
+						<input type="text" name="pc" id="pc" placeholder="Code postal" value="{{ customer.pc }}" disabled>
+					</div>
+
+					<div class="field">
+						<label for="city">Ville</label>
+						<input type="text" name="city" id="city" placeholder="Ville" value="{{ customer.city }}" disabled>
+					</div>
+				</div>
+
+				<div class="two fields">
+					<div class="field">
+						<label for="website">Site web</label>
+						<input type="text" name="website" id="website" placeholder="Site web" value="{{ customer.website }}" disabled>
+					</div>
+
+					<div class="field">
+						<label for="rib">RIB</label>
+						<input type="text" name="rib" id="rib" placeholder="RIB" value="{{ customer.rib }}" disabled>
+					</div>
+				</div>
+
+				<div class="field">
+					<label for="comment">Commentaire</label>
+					<textarea name="comment" id="comment" placeholder="Commentaire personnalisé du client" disabled>{{ customer.comment }}</textarea>
+				</div>
+
+				<div class="ui checkbox field">
+					{% if pro %}
+						<input class="form-pro-check" type="checkbox" name="pro" id="pro" checked disabled>
+					{% else %}
+						<input class="form-pro-check" type="checkbox" name="pro" id="pro" disabled>
+					{% endif %}
+					<label for="pro">Pro</label>
+				</div>
+
+				<div class="two fields">
+					<div class="field form-pro-siret">
+						<label for="siret">SIRET</label>
+						<input type="text" name="siret" placeholder="SIRET" id="siret" value="{{ customer.siret }}" disabled>
+					</div>
+
+					<div class="field form-pro-bic">
+						<label for="bic">BIC</label>
+						<input type="text" name="bic" id="bic" placeholder="BIC" value="{{ customer.bic }}" disabled>
+					</div>
+				</div>
+
+				<h4 class="ui dividing header">Contacts</h4>
+
+				<a class="ui olive button" href="{{ path('app_add_contact', {'code': customer.code}) }}"><i class="plus icon"></i> Nouveau</a>
+
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th>Action</th>
+							<th>Prénom</th>
+							<th>Nom</th>
+							<th>Fonction</th>
+							<th>Commentaire</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for contact in contacts_customer %}
+							<tr>
+								<td style="text-align: center;">
+									<a href="{{ path('app_edit_contact_customer', {'id': contact.id}) }}"><i style="color: orange;font-size: 20px" class="edit icon"></i></a>
+									<a href="{{ path('app_contacts_delete', {'id': contact.id}) }}"><i style="color: var(--color-red);font-size: 20px" class="trash icon"></i></a>
+								</td>
+								<td>{{ contact.firstName }}</td>
+								<td>{{ contact.lastName }}</td>
+								<td>{{ contact.function }}</td>
+								<td>{{ contact.comment }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				<br>
+				<input disabled class="ui olive button" name="sub_edit_customer" type="submit" value="Mettre à jour">
+				<br><br>
+
+			</form>
+		</div>
+	</div>
+
+
+
+{% endblock %}
+
+
+{% block js %}
+	<script src="{{ asset('js/locker_customer.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/tab.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/api.min.js"></script>
+{% endblock %}

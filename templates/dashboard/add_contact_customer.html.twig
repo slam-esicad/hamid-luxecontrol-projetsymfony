@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/menu.min.css">
+
+{% endblock %}
+
+{% block title %}Ajouter un nouveau contact{% endblock %}
+
+
+{% block body %}
+
+	{{ component('Sidebar') }}
+
+	<div class="ui container">
+		<h1 class="header inika">Nouveau contact pour le client : {{ customer.code }}</h1>
+
+		<div class="ui form">
+			<form method="POST">
+				<h4 class="ui dividing header">Informations du contact</h4>
+
+				<div class="three fields">
+					<div class="field">
+						<label for="firstname">Prénom</label>
+						<input type="text" name="firstname" id="firstname" placeholder="Prénom">
+					</div>
+
+					<div class="field">
+						<label for="lastname">Nom</label>
+						<input type="text" name="lastname" id="lastname" placeholder="Nom">
+					</div>
+
+					<div class="field">
+						<label for="function">Fonction</label>
+						<input type="text" name="function" id="function" placeholder="Fonction">
+					</div>
+				</div>
+
+				<div class="field">
+					<label for="comment">Commentaire</label>
+					<textarea name="comment" id="comment" placeholder="Commentaire du contact"></textarea>
+				</div>
+
+				<input class="ui olive button" name="sub_add_contact" type="submit" value="Ajouter">
+
+			</form>
+		</div>
+	</div>
+
+
+
+{% endblock %}
+
+
+{% block js %}
+	<script src="{{ asset('js/locker_customer.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/tab.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/api.min.js"></script>
+{% endblock %}
