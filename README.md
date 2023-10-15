@@ -1,5 +1,5 @@
 # hamid-luxecontrol-projetsymfony
-Gros projet pour le BTS en Symfony
+Projet pour le BTS en Symfony
 
 # Luxe Control
 
