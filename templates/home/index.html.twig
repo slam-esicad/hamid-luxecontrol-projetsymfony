@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="ui container">
+
+        <img height="150px" src="{{ asset('img/logo.png') }}" alt="">
+
+        <h1>LuxeControl</h1>
+
+        <p class="preambule">Luxecontrol est une application de gestion de parc automobile et client. Maitrisez votre outil de gestion et statistiques en un clin d'oeil.</p>
+
+        <a class="ui clr_bg button" href="{{ path('app_login') }}">
+            Connexion
+        </a>
+    </div>
+{% endblock %}

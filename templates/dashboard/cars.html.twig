@@ -1,0 +1,78 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Liste des voitures{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="ui container">
+
+        {% for msg in app.flashes('success') %}
+            {{ component('Alert', {type: 'success', text: msg}) }}
+        {% endfor %}
+
+        {% for msg in app.flashes('error') %}
+            {{ component('Alert', {type: 'error', text: msg}) }}
+        {% endfor %}
+
+        <h1 class="header inika">Liste des voitures</h1>
+
+        <p>{{ nb_cars }} voitures au total</p>
+
+        <a href="{{ path('app_create_car') }}">
+            <button class="ui clr_bg button">
+                <i class="plus icon"></i>
+                Nouvelle
+            </button>
+        </a>
+
+
+
+        <br><br>
+
+        <div class="ui form">
+            <form method="POST">
+                <div class="field">
+                    <label for="search">Rechercher</label>
+                    <input type="search" name="search" id="search" placeholder="Rechercher"><br><br>
+                    <input style="display: none;" class="ui teal button" type="submit" value="Rechercher" name="sub_search_customers">
+                </div>
+            </form>
+        </div>
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Visuel</th>
+                <th>Marque</th>
+                <th>Modèle</th>
+                <th>Couleur</th>
+                <th>KMs</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for car in cars_list %}
+
+                <tr onclick="window.location = '{{ path('app_edit_car', {'id': car.id})  }}'">
+
+                    <td>
+                        <a href="{{ path('app_edit_car', {'id': car.id}) }}">
+                            <div style="background: no-repeat center url({{ asset('uploads/' ~ car.img) }}); background-size: cover; width: 500px;height: 200px; border-radius: 15px;"></div>
+                        </a>
+
+                    </td>
+
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.model }}</td>
+                    <td>{{ car.color }}</td>
+                    <td>{{ car.km }}</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+    </div>
+
+{% endblock %}

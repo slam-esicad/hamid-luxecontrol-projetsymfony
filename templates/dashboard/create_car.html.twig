@@ -1,0 +1,115 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Créer une nouvelle voiture{% endblock %}
+
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Nouvelle voiture</h1>
+
+        {{ component('Hr', { icon: 'circle info', text: 'Information de la voiture' }) }}
+
+        <div class="ui form">
+            {{ form_start(createCarForm) }}
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="create_car_brand">Marque</label>
+                    {{ form_row(createCarForm.brand) }}
+                </div>
+
+                <div class="field">
+                    <label for="create_car_model">Modèle</label>
+                    {{ form_row(createCarForm.model) }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="create_car_img">Image</label>
+                {{ form_row(createCarForm.img) }}
+            </div>
+
+            <div class="field">
+                <label for="create_car_comment">Commentaire</label>
+                {{ form_row(createCarForm.comment) }}
+            </div>
+
+            {{ component('Hr', { icon: 'key', text: 'Technique' }) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="create_car_km">Kilométrage</label>
+                    {{ form_row(createCarForm.km) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_color">Couleur</label>
+                    {{ form_row(createCarForm.color) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_energy">Carburant</label>
+                    {{ form_row(createCarForm.energy) }}
+                </div>
+            </div>
+            
+            
+            <div class="three fields">
+                <div class="field">
+                    <label for="create_car_tank">Réservoir</label>
+                    {{ form_row(createCarForm.tank) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_reg_number">Plaque d'immatriculation</label>
+                    {{ form_row(createCarForm.reg_number) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_horsepower">Puissance (ch)</label>
+                    {{ form_row(createCarForm.horsepower) }}
+                </div>
+            </div>
+            
+            
+            <div class="three fields">
+                <div class="field">
+                    <label for="create_car_gearbox">Boite de vitesse</label>
+                    {{ form_row(createCarForm.gearbox) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_doors">Nombre de portes</label>
+                    {{ form_row(createCarForm.doors) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_year">Année</label>
+                    {{ form_row(createCarForm.year) }}
+                </div>
+            </div>
+
+            {{ component('Hr', { icon: 'money', text: 'Location', color: 'yellow' }) }}
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="create_car_dayprice">Prix journalier</label>
+                    {{ form_row(createCarForm.dayprice) }}
+                </div>
+                <div class="field">
+                    <label for="create_car_buyprice">Prix d'achat</label>
+                    {{ form_row(createCarForm.buyprice) }}
+                </div>
+            </div>
+
+            <div class="field">
+                {{ form_row(createCarForm.sub_car, {
+                    'label': 'Ajouter'
+                }) }}
+            </div>
+
+            {{ form_end(createCarForm) }}
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}

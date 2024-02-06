@@ -1,0 +1,57 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Tableau de bord</h1>
+        <div class="ui three column grid">
+            <div class="column">
+                <div class="ui fluid cart">
+                    <div class="content">
+                        <i class="blue icon_card fa fa-car"></i>
+                        <h2 class="header bold">4</h2>
+                        <p>Locations en cours, sur <b>{{ nb_cars }}</b> voitures</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid cart">
+                    <div class="content">
+                        <i class="green icon_card fa fa-users"></i>
+                        <h2 class="header bold">1 832</h2>
+                        <p>Clients</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid cart">
+                    <div class="content">
+                        <i class="yellow icon_card fa fa-hand-holding-dollar"></i>
+                        <h2 class="header">{{ 1282732|format_currency('EUR') }}</h2>
+                        <p>Chiffre d'affaire cette année</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui two column grid">
+            <div class="column">
+                <div class="ui fluid cart">
+                    <div class="content">
+                        <h2 class="header">Notes</h2>
+                        <form method="POST">
+                            <textarea style="width: 100%; height: 200px; padding: 5px; border: 1px solid lightgray; outline: none;" name="notes" id="notes"></textarea>
+                            <input name="sub_edit_notes" style="margin-top: 20px; padding: 10px;" class="ui yellow button" value="Enregistrer" type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

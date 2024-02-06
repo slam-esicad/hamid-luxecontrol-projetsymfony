@@ -1,0 +1,84 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>LuxeControl - {% block title %}{% endblock %}</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/NPM/@simondmc/popup-js@1.4.2/popup.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Italianno&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inika&family=Inter:wght@200;300;400;500;600;700&family=Italianno&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ asset('img/logo.ico') }}">
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+
+    {% block css %}{% endblock %}
+</head>
+<body>
+<div class="ui fixed inverted segment menu-top">
+
+</div>
+
+<div class="ui left fixed vertical menu p_sidebar">
+    <div class="ui inverted secondary pointing menu menu-top">
+        <a class="title-top" href="{{ path('app_home') }}">Luxe Control</a>
+    </div>
+    <a class="item" href="{{ path('app_dashboard') }}"><i class="fa fa-igloo"></i> <span>Dashboard</span> <i class="arrow right icon"></i></a>
+    <a class="item" href="{{ path('app_cars') }}"><i class="fa fa-car"></i> <span>Voitures</span> <i class="arrow right icon"></i></a>
+    <a class="item" href="{{ path('app_home') }}"><i class="fa fa-user"></i> <span>Clients</span> <i class="arrow right icon"></i></a>
+    <a class="item" href="{{ path('app_home') }}"><i class="fa fa-file-contract"></i> <span>Contrats</span> <i class="arrow right icon"></i></a>
+    <a href="{{ path('app_home') }}" class="item"><i class="fa fa-chart-bar"></i> <span>Statistique</span> <i class="arrow right icon"></i></a>
+    <a href="{{ path('app_home') }}" class="item"><i class="fa fa-cog"></i> <span>Règlages</span> <i class="arrow right icon"></i></a>
+    <a class="item" href="{{ path('app_logout') }}"><i class="fa fa-door-open"></i> <span>Déconnexion</span> <i class="arrow right icon"></i></a>
+
+    <div class="popupa">
+        Notes
+    </div>
+</div>
+
+
+{% block body %}{% endblock %}
+
+{% block js %}
+    <script>
+        const myPopup = new Popup({
+            id: "my-popup",
+            title: "N O T E S",
+            content: `
+        {{ app.session.get('notes') }}`,
+            css: `
+            .popup {
+                padding-top: 400px !important;
+                color: red !important;
+                height: 100% !important;
+                overflow-y: auto !important;
+            }
+
+            .popup .popup-body {
+                overflow-y: auto !important;
+                height: 100% !important;
+            }
+
+            .popup p {
+                font-size: 13px !important;
+                text-align: justify !important;
+            }
+        `
+        });
+
+        $('.popupa').on('click', () => {
+            myPopup.show();
+        });
+
+        $('.ui.dropdown')
+            .dropdown({
+                allowAdditions: true
+            })
+        ;
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/api.min.js"></script>
+{% endblock %}
+</body>
+</html>

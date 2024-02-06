@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="logo">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo LuxeControl">
+    </div>
+
+    <div class="ui form raised very padded text container segment">
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        <div class="field">
+            <label for="name">Nom</label>
+            {{ form_row(registrationForm.name) }}
+        </div>
+
+        <div class="field">
+            <label for="email">Email</label>
+            {{ form_row(registrationForm.email) }}
+        </div>
+
+        <div class="field">
+            <label for="password">Mot de passe</label>
+            {{ form_row(registrationForm.plainPassword) }}
+        </div>
+
+        <button type="submit" class="ui clr_bg button">Créer un utilisateur</button>
+    {{ form_end(registrationForm) }}
+
+    </div>
+{% endblock %}

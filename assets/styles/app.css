@@ -1,3 +1,107 @@
+:root {
+    --color-gray: #333333;
+    --color-red: #C53D45;
+    --color-green: #4BBE4F;
+    --color-bg: #202739;
+}
+
+tr, td {
+    cursor: pointer !important;
+}
+
 body {
-    background-color: skyblue;
+    background-color: #f4f8fa;
+    font-family: "Inter", serif;
+}
+
+.menu-top {
+    border-radius: 0 !important;
+    background-color: var(--color-bg) !important;
+    border: none !important;
+    padding-left: 10px !important;
+    z-index: 9999;
+    height: 40px !important;
+}
+
+.title-top {
+    color: #fff;
+    font-family: 'Italianno', sans-serif;
+    text-align: center;
+    font-size: 40px !important;
+    border: none !important;
+}
+
+.title-top:hover{color: #fff}
+.logo {text-align:center;}
+.logo img {height: 200px;}
+.right {float: right;margin:0 !important;}
+.p_sidebar {padding-top:50px;}
+.p_sidebar a.item:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.container {padding-left: 160px; padding-top: 10px; width: 85% !important;}
+form .login {
+    width: 50%;
+}
+
+
+.p_sidebar {
+    background-color: var(--color-bg) !important;
+}
+
+.p_sidebar span {
+    margin-left: 10px;
+}
+
+.p_sidebar .item {
+    color: white !important;
+    font-size: 16px;
+    font-family: "Inter", serif !important;
+}
+
+.icon_card {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.blue {color: #3B70BE;}
+.red {color: #C53D45;}
+.green {color: #4BBE4F !important;}
+.yellow {color: #E8D572;}
+.bold {font-weight: bold !important;}
+.inika {font-family: 'Inika', serif !important;}
+thead .tr-head > th {background-color: var(--color-bg) !important; color: white !important;}
+.locked { color: var(--color-red); }
+.unlocked { color: var(--color-green) !important; }
+.trash { color: #ecbc56 !important; }
+.clr_bg { background-color: var(--color-bg) !important; color: #fff !important; }
+.clr_bg:hover { background-color: rgba(32, 39, 57, 0.8) !important; }
+
+.cart {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;margin: 0;
+    border-radius: 5px;
+    box-shadow: 0px -0px 10px 1px #b4b4b4;
+}
+
+.cart .content > * {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.popupa {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.preambule {
+    font-size: 25px !important;
 }
