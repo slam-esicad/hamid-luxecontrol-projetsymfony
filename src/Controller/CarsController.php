@@ -100,9 +100,7 @@ class CarsController extends AbstractController
     }
 
     #[Route('/voiture/supprimer/{id}', 'delete_car')]
-    public function delete(EntityManagerInterface $entityManager, int $id, CarsRepository $carsRepository, Request $request) {
-
-        $car = $carsRepository->find($id);
+    public function delete(Cars $car, EntityManagerInterface $entityManager) {
 
         $entityManager->remove($car);
         $entityManager->flush();
