@@ -33,7 +33,7 @@ class CustomersController extends AbstractController
         $customer = new Customers();
 
         $createCustomerForm = $this->createForm(CustomerType::class, $customer);
-        $createCustomerForm->handleRequest($request);
+        $createCustomerForm->handleRequest($request); // ok
 
         if($createCustomerForm->isSubmitted() && $createCustomerForm->isValid())
         {
