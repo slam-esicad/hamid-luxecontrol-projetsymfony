@@ -1,0 +1,81 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+
+        {% for msg in app.flashes('success') %}
+            {{ component('Alert', {type: 'success', text: msg}) }}
+        {% endfor %}
+
+        <h1 class="header inika">Liste des clients</h1>
+
+        <p>{{ nb_customers }} clients au total</p>
+
+        <a href="{{ path('app_create_customer') }}">
+
+            <button class="ui clr_bg button">
+                <i class="plus icon"></i>
+                Nouveau
+            </button>
+        </a>
+
+        <br><br>
+
+        <div class="ui form">
+            <form method="POST">
+                <div class="field">
+                    <label for="search">Rechercher</label>
+                    <input type="search" name="search" id="search" placeholder="Rechercher"><br><br>
+                    <input style="display: none;" class="ui teal button" type="submit" value="Rechercher" name="sub_search_customers">
+                </div>
+            </form>
+        </div>
+
+
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Nom ou raison sociale</th>
+                <th>Adresse</th>
+                <th>Code postal</th>
+                <th>Ville</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Client PRO</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+
+                <tr onclick="window.location = '{{ path('app_edit_customer', {'id': customer.id}) }}'">
+
+                    <td>
+                        <a href="{{ path('app_edit_customer', {'id': customer.id}) }}">
+                            {{ customer.name }}
+                        </a>
+                    </td>
+
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.pc }}</td>
+                    <td>{{ customer.city }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td class="ui center">
+                        {% if customer.pro %}
+                            <i class="fa fa-check"></i>
+                        {% else %}
+                            <i class="fa fa-xmark"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
