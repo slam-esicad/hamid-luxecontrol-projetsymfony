@@ -37,7 +37,6 @@ class CustomersController extends AbstractController
 
         if($createCustomerForm->isSubmitted() && $createCustomerForm->isValid())
         {
-
             $entityManager->persist($customer);
             $entityManager->flush();
 
