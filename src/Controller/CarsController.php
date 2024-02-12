@@ -98,4 +98,15 @@ class CarsController extends AbstractController
             'car' => $cars
         ]);
     }
+
+    #[Route('/voiture/supprimer/{id}', 'delete_car')]
+    public function delete(EntityManagerInterface $entityManager, int $id, CarsRepository $carsRepository, Request $request) {
+
+        $car = $carsRepository->find($id);
+
+        $entityManager->remove($car);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_cars');
+    }
 }

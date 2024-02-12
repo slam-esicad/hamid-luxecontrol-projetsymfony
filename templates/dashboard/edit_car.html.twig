@@ -7,6 +7,10 @@
     <div class="ui container">
         <h1 class="header inika">Modifier la voiture : {{ car.brand.name ~ " " ~ car.model }}</h1>
 
+        <a href="{{ path('app_delete_car', {'id': car.id}) }}">
+            <button class="ui red button">Supprimer</button>
+        </a>
+
         {{ component('Hr', { icon: 'circle info', text: 'Information de la voiture' }) }}
 
         <div class="ui form">
