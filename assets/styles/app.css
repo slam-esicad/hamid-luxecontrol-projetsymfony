@@ -64,8 +64,9 @@ form .login {
     margin-bottom: 30px;
 }
 
+.orange {color: #ceaa66}
 .blue {color: #3B70BE;}
-.red {color: #C53D45;}
+.red {color: var(--color-red);}
 .green {color: #4BBE4F !important;}
 .yellow {color: #E8D572;}
 .bold {font-weight: bold !important;}

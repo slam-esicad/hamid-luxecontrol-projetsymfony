@@ -1,11 +1,11 @@
 {% extends 'Sidebar.base.html.twig' %}
 
-{% block title %}Créer une nouvelle voiture{% endblock %}
+{% block title %}Modifier la voiture {{ car.brand.name ~ " " ~ car.model }}{% endblock %}
 
 {% block body %}
 
     <div class="ui container">
-        <h1 class="header inika">Modifier la voiture : {{ car.brand ~ " " ~ car.model }}</h1>
+        <h1 class="header inika">Modifier la voiture : {{ car.brand.name ~ " " ~ car.model }}</h1>
 
         {{ component('Hr', { icon: 'circle info', text: 'Information de la voiture' }) }}
 

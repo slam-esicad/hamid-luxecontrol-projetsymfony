@@ -15,9 +15,6 @@ class Cars
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $brand = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $model = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -59,21 +56,12 @@ class Cars
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $color = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    private ?Brands $brand = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBrand(): ?string
-    {
-        return $this->brand;
-    }
-
-    public function setBrand(string $brand): static
-    {
-        $this->brand = $brand;
-
-        return $this;
     }
 
     public function getModel(): ?string
@@ -240,6 +228,18 @@ class Cars
     public function setColor(string $color): static
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brands
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brands $brand): static
+    {
+        $this->brand = $brand;
 
         return $this;
     }

@@ -3,8 +3,8 @@
 {% block title %}Liste des voitures{% endblock %}
 
 
-{% block body %}
 
+{% block body %}
 
     <div class="ui container">
 
@@ -18,7 +18,7 @@
 
         <h1 class="header inika">Liste des voitures</h1>
 
-        <p>{{ nb_cars }} voitures au total</p>
+        <p>{{ cars_list|length }} voitures au total</p>
 
         <a href="{{ path('app_create_car') }}">
             <button class="ui clr_bg button">
@@ -44,6 +44,7 @@
         <table class="ui celled table">
             <thead class="tr-head">
             <tr class="tr-head">
+                <th>Action</th>
                 <th>Visuel</th>
                 <th>Marque</th>
                 <th>Modèle</th>
@@ -53,22 +54,19 @@
             </thead>
             <tbody>
             {% for car in cars_list %}
-
-                <tr onclick="window.location = '{{ path('app_edit_car', {'id': car.id})  }}'">
-
+                <tr>
+                    <td class="center aligned card"><a href="{{ path('app_edit_car', {'id': car.id}) }}"><i class="orange edit icon"></i></a> -
+                        <a href="#"><i class="red trash icon"></i></a></td>
                     <td>
-                        <a href="{{ path('app_edit_car', {'id': car.id}) }}">
-                            <div style="background: no-repeat center url({{ asset('uploads/' ~ car.img) }}); background-size: cover; width: 500px;height: 200px; border-radius: 15px;"></div>
-                        </a>
-
+                        <div style="background: no-repeat center url({{ asset('uploads/' ~ car.img) }}); background-size: cover; width: 500px;height: 200px; border-radius: 15px;"></div>
                     </td>
 
-                    <td>{{ car.brand }}</td>
+                    <td>{{ car.brand.name }}</td>
                     <td>{{ car.model }}</td>
                     <td>{{ car.color }}</td>
                     <td>{{ car.km }}</td>
-                </tr>
 
+                </tr>
             {% endfor %}
             </tbody>
         </table>

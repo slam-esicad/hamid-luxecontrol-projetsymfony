@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cars;
-use App\Form\CreateCarType;
+use App\Form\CarType;
 use App\Repository\CarsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +19,8 @@ class CarsController extends AbstractController
     public function index(CarsRepository $carsRepository): Response
     {
 
-        $cars_list = $carsRepository->findAll();
-
         return $this->render('dashboard/cars.html.twig', [
-            'cars_list' => $cars_list,
-            'nb_cars' => count($cars_list)
+            'cars_list' => $carsRepository->findAll()
         ]);
     }
 
@@ -33,9 +30,8 @@ class CarsController extends AbstractController
 
         $car = new Cars();
 
-        $createCarForm = $this->createForm(CreateCarType::class, $car);
+        $createCarForm = $this->createForm(CarType::class, $car);
         $createCarForm->handleRequest($request);
-
 
         if($createCarForm->isSubmitted() && $createCarForm->isValid())
         {
@@ -56,6 +52,8 @@ class CarsController extends AbstractController
             }
             $entityManager->persist($car);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_cars');
         }
 
         return $this->render('dashboard/create_car.html.twig', [
@@ -68,7 +66,7 @@ class CarsController extends AbstractController
     public function edit(SluggerInterface $slugger, Cars $cars, EntityManagerInterface $entityManager, Request $request, CarsRepository $carsRepository) : Response
     {
 
-        $editCarForm = $this->createForm(CreateCarType::class, $cars);
+        $editCarForm = $this->createForm(CarType::class, $cars);
         $editCarForm->handleRequest($request);
 
         if($editCarForm->isSubmitted() && $editCarForm->isValid())
@@ -91,6 +89,8 @@ class CarsController extends AbstractController
 
             $entityManager->persist($cars);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_cars');
         }
 
         return $this->render('dashboard/edit_car.html.twig', [

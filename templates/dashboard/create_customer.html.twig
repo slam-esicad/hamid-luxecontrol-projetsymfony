@@ -1,0 +1,127 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Créer un nouveau client{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Nouveau client</h1>
+
+        {{ component('Hr', { icon: 'circle info', text: 'Informations générales' }) }}
+
+        <div class="ui form">
+            {{ form_start(createCustomerForm) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="customer_name">Nom ou raison sociale</label>
+                    {{ form_row(createCustomerForm.name) }}
+                </div>
+
+                <div class="field">
+                    <label for="customer_email">Email</label>
+                    {{ form_row(createCustomerForm.email) }}
+                </div>
+                
+                <div class="field">
+                    <label for="customer_phone">Numéro de téléphone</label>
+                    {{ form_row(createCustomerForm.phone) }}
+                </div>
+            </div>
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="customer_address">Adresse</label>
+                    {{ form_row(createCustomerForm.address) }}
+                </div>
+
+                <div class="field">
+                    <label for="customer_cp">Code Postal</label>
+                    {{ form_row(createCustomerForm.pc) }}
+                </div>
+
+                <div class="field">
+                    <label for="customer_city">Ville</label>
+                    {{ form_row(createCustomerForm.city) }}
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="customer_website">Site web</label>
+                    {{ form_row(createCustomerForm.website) }}
+                </div>
+
+                <div class="field">
+                    <label for="customer_rib">RIB</label>
+                    {{ form_row(createCustomerForm.rib) }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="customer_comment">Commentaire</label>
+                {{ form_row(createCustomerForm.comment) }}
+            </div>
+
+            <div class="ui checkbox">
+                {{ form_widget(createCustomerForm.pro) }}
+                <label for="customer_pro">Pro</label>
+            </div>
+
+            <div class="two fields">
+                <div class="field form-pro-siret">
+                    <label for="customer_siret">SIRET</label>
+                    {{ form_row(createCustomerForm.siret) }}
+                </div>
+                
+                <div class="field form-pro-siret">
+                    <label for="customer_bic">BIC</label>
+                    {{ form_row(createCustomerForm.bic) }}
+                </div>
+            </div>
+
+            <div class="field">
+                {{ form_row(createCustomerForm.sub_customer, {
+                    'label': "Ajouter"
+                }) }}
+            </div>
+
+            {{ form_end(createCustomerForm) }}
+
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+    $('.ui.checkbox').checkbox();
+
+    let formProCheck = document.querySelector('.form-pro-check')
+
+    let showProInfos = () => {
+        $('.form-pro-siret').show();
+        $('.form-pro-bic').show()
+    }
+
+    let hideProInfos = () => {
+        $('.form-pro-siret').hide()
+        $('.form-pro-bic').hide()
+    }
+    hideProInfos()
+
+    formProCheck.addEventListener('change', () => {
+        if($(formProCheck).is(':checked')) {
+            showProInfos()
+        } else {
+            hideProInfos()
+        }
+    })
+</script>
+{% endblock %}

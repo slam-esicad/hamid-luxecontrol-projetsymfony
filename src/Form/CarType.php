@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Brands;
 use App\Entity\Cars;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,12 +18,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class CreateCarType extends AbstractType
+class CarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('brand', ChoiceType::class, [
+            /*->add('brand', ChoiceType::class, [
                 'choices' => [
                     'Renault' => 'Renault',
                     'Ouais' => 'ouais',
@@ -30,10 +33,14 @@ class CreateCarType extends AbstractType
                 'attr' => [
                     'class' => 'ui dropdown'
                 ]
-            ])
-            /*->add('brand', TextType::class, [
-                'label' => false
             ])*/
+            ->add('brand', EntityType::class, [
+                'class' => Brands::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'label' => false
+            ])
             ->add('model', TextType::class, [
                 'label' => false
             ])
