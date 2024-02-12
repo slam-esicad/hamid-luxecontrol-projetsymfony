@@ -39,6 +39,7 @@
         <table class="ui celled table">
             <thead class="tr-head">
             <tr class="tr-head">
+                <th>Voir</th>
                 <th>Nom ou raison sociale</th>
                 <th>Adresse</th>
                 <th>Code postal</th>
@@ -50,13 +51,11 @@
             </thead>
             <tbody>
             {% for customer in customers %}
+                <tr>
 
-                <tr onclick="window.location = '{{ path('app_edit_customer', {'id': customer.id}) }}'">
-
+                    <td class="center aligned card"><a href="{{ path('app_edit_customer', {'id': customer.id}) }}"><i class="blue eye icon"></i></a></td>
                     <td>
-                        <a href="{{ path('app_edit_customer', {'id': customer.id}) }}">
                             {{ customer.name }}
-                        </a>
                     </td>
 
                     <td>{{ customer.address }}</td>

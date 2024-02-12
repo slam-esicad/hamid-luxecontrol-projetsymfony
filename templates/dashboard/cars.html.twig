@@ -55,8 +55,7 @@
             <tbody>
             {% for car in cars_list %}
                 <tr>
-                    <td class="center aligned card"><a href="{{ path('app_edit_car', {'id': car.id}) }}"><i class="orange edit icon"></i></a> -
-                        <a href="#"><i class="red trash icon"></i></a></td>
+                    <td class="center aligned card"><a href="{{ path('app_edit_car', {'id': car.id}) }}"><i class="blue eye icon"></i></a></td>
                     <td>
                         <div style="background: no-repeat center url({{ asset('uploads/' ~ car.img) }}); background-size: cover; width: 500px;height: 200px; border-radius: 15px;"></div>
                     </td>

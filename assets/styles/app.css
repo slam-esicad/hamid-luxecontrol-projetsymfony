@@ -5,10 +5,6 @@
     --color-bg: #202739;
 }
 
-tr, td {
-    cursor: pointer !important;
-}
-
 body {
     background-color: #f4f8fa;
     font-family: "Inter", serif;
