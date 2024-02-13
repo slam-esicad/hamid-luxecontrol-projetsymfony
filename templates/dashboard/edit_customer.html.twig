@@ -67,9 +67,15 @@
                 {{ form_row(editCustomerForm.comment) }}
             </div>
 
-            <div class="ui checkbox">
-                {{ form_widget(editCustomerForm.pro) }}
-                <label for="customer_pro">Pro</label>
+            <div class="field">
+                <div class="ui checkbox">
+                    {{ form_widget(editCustomerForm.pro, {
+                        'attr': {
+                            'class': 'form-pro-check'
+                        }
+                    }) }}
+                    <label for="customer_pro">Pro</label>
+                </div>
             </div>
 
             <div class="two fields">
@@ -78,7 +84,7 @@
                     {{ form_row(editCustomerForm.siret) }}
                 </div>
 
-                <div class="field form-pro-siret">
+                <div class="field form-pro-bic">
                     <label for="customer_bic">BIC</label>
                     {{ form_row(editCustomerForm.bic) }}
                 </div>
@@ -104,28 +110,5 @@
 
 
 {% block js %}
-    <script>
-        $('.ui.checkbox').checkbox();
-
-        let formProCheck = document.querySelector('.form-pro-check')
-
-        let showProInfos = () => {
-            $('.form-pro-siret').show();
-            $('.form-pro-bic').show()
-        }
-
-        let hideProInfos = () => {
-            $('.form-pro-siret').hide()
-            $('.form-pro-bic').hide()
-        }
-        hideProInfos()
-
-        formProCheck.addEventListener('change', () => {
-            if($(formProCheck).is(':checked')) {
-                showProInfos()
-            } else {
-                hideProInfos()
-            }
-        })
-    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}
