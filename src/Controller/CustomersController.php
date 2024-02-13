@@ -49,9 +49,31 @@ class CustomersController extends AbstractController
     }
 
     #[Route('/client/{id}', 'edit_customer')]
-    public function edit(Customers $customers, CustomersRepository $customersRepository): Response
+    public function edit(EntityManagerInterface $entityManager, Request $request, Customers $customers, CustomersRepository $customersRepository): Response
     {
+        $editCustomerForm = $this->createForm(CustomerType::class, $customers);
+        $editCustomerForm->handleRequest($request);
 
-        return $this->render('dashboard/edit_customer.html.twig');
+        if($editCustomerForm->isSubmitted() && $editCustomerForm->isValid())
+        {
+            $entityManager->persist($customers);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_customers');
+
+        }
+
+        return $this->render('dashboard/edit_customer.html.twig', [
+            'customer' => $customers,
+            'editCustomerForm' => $editCustomerForm
+        ]);
+    }
+
+    #[Route('/voiture/supprimer/{id}', 'delete_customer')]
+    public function delete(Customers $customers, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($customers);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_cars');
     }
 }
