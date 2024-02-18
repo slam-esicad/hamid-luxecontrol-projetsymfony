@@ -55,10 +55,15 @@ class Customers
     #[ORM\OneToMany(targetEntity: ContactsCustomers::class, mappedBy: 'customer')]
     private Collection $contactsCustomers;
 
+    #[ORM\OneToMany(targetEntity: Contracts::class, mappedBy: 'customer')]
+    private Collection $contracts;
+
+
     public function __construct()
     {
         $this->contactsCustomer = new ArrayCollection();
         $this->contactsCustomers = new ArrayCollection();
+        $this->contracts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -239,5 +244,40 @@ class Customers
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Contracts>
+     */
+
+    /**
+     * @return Collection<int, Contracts>
+     */
+    public function getContracts(): Collection
+    {
+        return $this->contracts;
+    }
+
+    public function addContract(Contracts $contract): static
+    {
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts->add($contract);
+            $contract->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContract(Contracts $contract): static
+    {
+        if ($this->contracts->removeElement($contract)) {
+            // set the owning side to null (unless already changed)
+            if ($contract->getCustomer() === $this) {
+                $contract->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

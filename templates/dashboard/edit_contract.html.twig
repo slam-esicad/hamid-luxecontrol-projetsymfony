@@ -1,0 +1,99 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Modifier le contract n°{{ contract.id }}{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Modifier le contract n°{{ contract.id }} de {{ contract.customer.name }}</h1>
+
+        <a href="{{ path('app_delete_contract', {'id': contract.id}) }}">
+            <button class="ui red button">Supprimer</button>
+        </a>
+
+        <div class="ui form">
+            {{ form_start(editContractForm) }}
+
+            {{ component('Hr', { icon: 'certificate', text: 'Statut du contract' }) }}
+
+            {% block css %}
+                <style>
+                    label[for=contract_status_0] {
+                        margin-right: 20px;
+                    }
+
+                    input[type=radio] {
+                        margin-right: 7px;
+                    }
+                </style>
+            {% endblock %}
+
+            <div class="field">
+                <div class="ui raised segment">
+                    <div class="inline fields" style="margin: 0;">
+                        <label for="statut">Statut du contrat : </label>
+                        {{ form_row(editContractForm.status) }}
+                    </div>
+                </div>
+            </div>
+
+            {{ component('Hr', { icon: 'circle info', text: 'Informations du contract' }) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="contract_type">Type</label>
+                    {{ form_row(editContractForm.type) }}
+                </div>
+
+                <div class="field">
+                    <label for="contract_customer">Client</label>
+                    {{ form_row(editContractForm.customer) }}
+                </div>
+
+                <div class="field">
+                    <label for="contract_car">Voiture</label>
+                    {{ form_row(editContractForm.car) }}
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="contract_startdate">Date de début</label>
+                    {{ form_row(editContractForm.startdate) }}
+                </div>
+
+                <div class="field">
+                    <label for="contract_enddate">Date de fin</label>
+                    {{ form_row(editContractForm.enddate) }}
+                </div>
+            </div>
+
+
+            <div class="field">
+                <label for="contract_comment">Commentaire</label>
+                {{ form_row(editContractForm.description) }}
+            </div>
+
+
+            <div class="field">
+                {{ form_row(editContractForm.submit, {
+                    'label': 'Mettre à jour'
+                }) }}
+            </div>
+
+            {{ form_row(editContractForm.price, {
+                'attr': {
+                    'hidden': true
+                }
+            }) }}
+
+            {{ form_end(editContractForm) }}
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}

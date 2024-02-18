@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,6 +60,14 @@ class Cars
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
     private ?Brands $brand = null;
+
+    #[ORM\OneToMany(targetEntity: Contracts::class, mappedBy: 'car')]
+    private Collection $contracts;
+
+    public function __construct()
+    {
+        $this->contracts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -240,6 +250,36 @@ class Cars
     public function setBrand(?Brands $brand): static
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contracts>
+     */
+    public function getContracts(): Collection
+    {
+        return $this->contracts;
+    }
+
+    public function addContract(Contracts $contract): static
+    {
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts->add($contract);
+            $contract->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContract(Contracts $contract): static
+    {
+        if ($this->contracts->removeElement($contract)) {
+            // set the owning side to null (unless already changed)
+            if ($contract->getCar() === $this) {
+                $contract->setCar(null);
+            }
+        }
 
         return $this;
     }

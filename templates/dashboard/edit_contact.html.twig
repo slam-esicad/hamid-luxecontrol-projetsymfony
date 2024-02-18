@@ -7,6 +7,9 @@
     <div class="ui container">
         <h1 class="header inika">Modifier le contact : {{ contact.firstname ~ " " ~ contact.lastname }}</h1>
 
+        <a href="{{ path('app_delete_contact', {'id': contact.id}) }}">
+            <button class="ui red button">Supprimer</button>
+        </a>
 
 
         {{ component('Hr', { icon: 'user', text: 'Contact' }) }}

@@ -1,0 +1,93 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Nouveau contract{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Nouveau contrat</h1>
+
+
+        <div class="ui form">
+            {{ form_start(createContractForm) }}
+
+
+            {% block css %}
+                <style>
+                    label[for=contract_status_0] {
+                        margin-right: 20px;
+                    }
+
+                    input[type=radio] {
+                        margin-right: 7px;
+                    }
+                </style>
+            {% endblock %}
+
+
+
+            {{ component('Hr', { icon: 'circle info', text: 'Informations du contract' }) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="contract_type">Type</label>
+                    {{ form_row(createContractForm.type) }}
+                </div>
+
+                <div class="field">
+                    <label for="contract_customer">Client</label>
+                    {{ form_row(createContractForm.customer) }}
+                </div>
+
+                <div class="field">
+                    <label for="contract_car">Voiture</label>
+                    {{ form_row(createContractForm.car) }}
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="contract_startdate">Date de début</label>
+                    {{ form_row(createContractForm.startdate) }}
+                </div>
+
+                <div class="field">
+                    <label for="contract_enddate">Date de fin</label>
+                    {{ form_row(createContractForm.enddate) }}
+                </div>
+            </div>
+
+
+            <div class="field">
+                <label for="contract_comment">Commentaire</label>
+                {{ form_row(createContractForm.description) }}
+            </div>
+
+
+            <div class="field">
+                {{ form_row(createContractForm.submit, {
+                    'label': 'Ajouter'
+                }) }}
+            </div>
+
+            {{ form_row(createContractForm.price, {
+                'attr': {
+                    'hidden': true
+                }
+            }) }} {{ form_row(createContractForm.status, {
+                'attr': {
+                    'class': 'padd',
+                    'hidden': true
+                }
+            }) }}
+
+            {{ form_end(createContractForm) }}
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}

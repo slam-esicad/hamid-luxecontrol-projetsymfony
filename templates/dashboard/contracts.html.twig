@@ -1,0 +1,91 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Liste des contrats{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+
+        {% for msg in app.flashes('success') %}
+            {{ component('Alert', {type: 'success', text: msg}) }}
+        {% endfor %}
+
+        {% for msg in app.flashes('error') %}
+            {{ component('Alert', {type: 'error', text: msg}) }}
+        {% endfor %}
+
+        <h1 class="header inika">Liste des contrats</h1>
+
+        <p>{{ nb_contracts }} contrats au total</p>
+
+        <a href="{{ path('app_create_contract') }}">
+            <button class="ui clr_bg button">
+                <i class="plus icon"></i>
+                Nouveau
+            </button>
+        </a>
+
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Action</th>
+                <th>Numéro</th>
+                <th>Client</th>
+                <th>Matricule</th>
+                <th>Description</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Prix</th>
+                <th>Statut</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contract in contracts %}
+                <tr {{ contract.status == 1 ? 'style="background-color: #ce8388;"' : ( contract.status == 2 ? 'style="background-color: gray;"' : '' ) }}>
+                    <td class="center aligned card"><a href="{{ path('app_edit_contract', {'id': contract.id}) }}"><i class="blue eye icon"></i></a></td>
+                    <td>
+                        {{ contract.id }}
+                    </td>
+                    <td>{{ contract.customer.name }}</td>
+                    <td>{{ contract.car.regNumber }}</td>
+                    <td>{{ contract.description }}</td>
+                    {% if contract.startdate <= date() and contract.enddate <= date() %}
+                        <td style="background-color: #ce8388;">{{ contract.startdate|date('d/m/y') }}</td>
+                        <td style="background-color: #ce8388;">{{ contract.enddate|date('d/m/y') }}</td>
+                    {% else %}
+                        <td>{{ contract.startdate|date('d/m/y') }}</td>
+                        <td>{{ contract.enddate|date('d/m/y') }}</td>
+                    {% endif %}
+                    <td>{{ contract.price|format_currency('EUR') }}</td>
+
+
+                    {% if contract.status == 0 %}
+                        <td>{{ "En cours" }}</td>
+                    {% elseif contract.status == 1 %}
+                        <td>{{ "Terminé" }}</td>
+                    {% elseif contract.status == 2 %}
+                        <td>{{ "En attente" }}</td>
+                    {% endif%}
+                </tr>
+            {% endfor %}
+            <tr>
+                <td><b>Total</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="background-color: darkseagreen">{{ total_prices|format_currency('EUR') }}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
