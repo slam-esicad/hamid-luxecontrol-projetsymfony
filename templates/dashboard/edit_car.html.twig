@@ -34,7 +34,11 @@
 
             <div class="field">
                 <label for="create_car_img">Image</label>
-                {{ form_row(createCarForm.img) }}
+                {{ form_row(createCarForm.img, {
+                    'attr': {
+                        'value': car.img
+                    }
+                }) }}
             </div>
 
             <div class="field">

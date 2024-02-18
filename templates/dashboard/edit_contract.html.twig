@@ -56,6 +56,23 @@
                 </div>
             </div>
 
+            <div class="three fields">
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field">
+                    <div class="two fields">
+                        <div class="field">
+                            <label for="pj">Prix journalier</label>
+                            <span>{{ contract.car.dayprice }}</span>
+                        </div>
+                        <div class="field">
+                            <label for="buy">Prix de vente</label>
+                            <span>12 000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="two fields">
                 <div class="field">
                     <label for="contract_startdate">Date de début</label>
@@ -65,6 +82,24 @@
                 <div class="field">
                     <label for="contract_enddate">Date de fin</label>
                     {{ form_row(editContractForm.enddate) }}
+                </div>
+            </div>
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="contract_price">Prix du contract</label>
+                    {{ form_row(editContractForm.price) }}
+                </div>
+
+                <div class="three fields">
+                    <div class="field">
+                        <label for="pdv">Prix de vente</label>
+                        <span class="ui teal button">PDV</span>
+                    </div>
+                    <div class="field">
+                        <label for="pdv">Prix de location</label>
+                        <span class="ui pink button">Location</span>
+                    </div>
                 </div>
             </div>
 
@@ -80,12 +115,6 @@
                     'label': 'Mettre à jour'
                 }) }}
             </div>
-
-            {{ form_row(editContractForm.price, {
-                'attr': {
-                    'hidden': true
-                }
-            }) }}
 
             {{ form_end(editContractForm) }}
         </div>

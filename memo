@@ -1,24 +1,4 @@
-<div class="three fields">
-                <div class="field">
-                    <label for="contract_price">Prix du contract</label>
-                    {{ form_row(createContractForm.price, {
-                        'attr': {
-                            'hidden': true
-                        }
-                    }) }}
-                </div>
 
-                <div class="three fields">
-                    <div class="field">
-                        <label for="pdv">Prix de vente</label>
-                        <button class="ui teal button">PDV</button>
-                    </div>
-                    <div class="field">
-                        <label for="pdv">Prix de location</label>
-                        <button class="ui pink button">Location</button>
-                    </div>
-                </div>
-            </div>
 
 
 

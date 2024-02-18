@@ -47,6 +47,7 @@ class CarType extends AbstractType
             ->add('img', FileType::class, [
                 'label' => false,
                 'data_class' => null,
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -92,12 +93,10 @@ class CarType extends AbstractType
                 'required' => false
             ])
             ->add('dayprice', IntegerType::class, [
-                'label' => false,
-                'attr' => ['value' => 0]
+                'label' => false
             ])
             ->add('buyprice', IntegerType::class, [
-                'label' => false,
-                'attr' => ['value' => 0]
+                'label' => false
             ])
             ->add('year', IntegerType::class, [
                 'label' => false,

@@ -7,6 +7,7 @@ use App\Form\CarType;
 use App\Repository\CarsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,7 +72,8 @@ class CarsController extends AbstractController
 
         if($editCarForm->isSubmitted() && $editCarForm->isValid())
         {
-            if($editCarForm->get('img') !== null) {
+
+            if($editCarForm->get('img') != null) {
 
                 $file = $editCarForm->get('img')->getData();
 
@@ -85,12 +87,16 @@ class CarsController extends AbstractController
                     $cars->setImg($newFilename);
                 }
 
+            } else {
+                $cars->setImg($cars->getImg());
             }
 
             $entityManager->persist($cars);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_cars');
+
+
         }
 
         return $this->render('dashboard/edit_car.html.twig', [
