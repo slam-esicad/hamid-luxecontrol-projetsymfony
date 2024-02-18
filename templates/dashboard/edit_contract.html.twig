@@ -63,11 +63,11 @@
                     <div class="two fields">
                         <div class="field">
                             <label for="pj">Prix journalier</label>
-                            <span>{{ contract.car.dayprice }}</span>
+                            <input title="{{ contract.car.dayprice }}" readonly value="{{ contract.car.dayprice|format_currency('EUR') }}" id="valueofdayprice">
                         </div>
                         <div class="field">
                             <label for="buy">Prix de vente</label>
-                            <span>12 000</span>
+                            <input title="{{ contract.car.buyprice }}" readonly value="{{ contract.car.buyprice|format_currency('EUR') }}" id="valueofbuyprice">
                         </div>
                     </div>
                 </div>
@@ -94,11 +94,11 @@
                 <div class="three fields">
                     <div class="field">
                         <label for="pdv">Prix de vente</label>
-                        <span class="ui teal button">PDV</span>
+                        <span id="btn_pdv" class="ui teal button">PDV</span>
                     </div>
                     <div class="field">
                         <label for="pdv">Prix de location</label>
-                        <span class="ui pink button">Location</span>
+                        <span id="btn_day" class="ui pink button">Location</span>
                     </div>
                 </div>
             </div>
@@ -124,5 +124,19 @@
 
 
     </div>
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        $('#btn_pdv').click(() => {
+            document.getElementById('contract_price').value = document.getElementById('valueofbuyprice').title
+        })
+
+        $('#btn_day').click(() => {
+            document.getElementById('contract_price').value = parseInt(document.getElementById('contract_price').value) + parseInt(document.getElementById('valueofdayprice').title)
+        })
+    </script>
 
 {% endblock %}
