@@ -6,14 +6,6 @@
 
     <div class="ui container">
 
-        {% for msg in app.flashes('success') %}
-            {{ component('Alert', {type: 'success', text: msg}) }}
-        {% endfor %}
-
-        {% for msg in app.flashes('error') %}
-            {{ component('Alert', {type: 'error', text: msg}) }}
-        {% endfor %}
-
         <h1 class="header inika">Liste des contrats</h1>
 
         <p>{{ nb_contracts }} contrats au total</p>

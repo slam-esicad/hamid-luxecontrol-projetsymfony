@@ -7,6 +7,10 @@
     <div class="ui container">
         <h1 class="header inika">Nouveau contrat</h1>
 
+        {% for msg in app.flashes('error') %}
+            {{ component('Alert', {type: 'error', text: msg}) }}
+        {% endfor %}
+
 
         <div class="ui form">
             {{ form_start(createContractForm) }}
