@@ -100,10 +100,81 @@
 
         </div>
 
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Action</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Fonction</th>
+            </tr>
+            </thead>
+            <tbody>
 
 
+                    <tr class="ui form">
+                        {{ form_start(addContactForm) }}
 
+                        {{ form_errors(addContactForm) }}
+                        <td>
+                            <div class="field center aligned card">
+                                {{ form_row(addContactForm.sub, {
+                                    'label': 'Ajouter'
+                                }) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="field">
+                                {{ form_row(addContactForm.firstname) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="field">
+                                {{ form_row(addContactForm.lastname) }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="field">
+                                {{ form_row(addContactForm.function) }}
+                            </div>
+                        </td>
 
+                        {{ form_row(addContactForm.email, {
+                            'attr': {
+                                'hidden': true
+                            }
+                        }) }}
+                        {{ form_row(addContactForm.phone, {
+                            'attr': {
+                                'hidden': true
+                            }
+                        }) }}
+                        {{ form_row(addContactForm.comment, {
+                            'attr': {
+                                'hidden': true
+                            }
+                        }) }}
+
+                        {{ form_end(addContactForm) }}
+                    </tr>
+                    {{ component('Hr', { icon: 'users', text: 'Contacts' }) }}
+
+                    {% for contact in contactsCustomers %}
+                <tr>
+
+                    <td class="center aligned card"><a href="{{ path('app_edit_contact', {'id': contact.id}) }}"><i class="blue eye icon"></i></a></td>
+                    <td>
+                        {{ contact.firstname }}
+                    </td>
+
+                    <td>{{ contact.lastname }}</td>
+                    <td>{{ contact.function }}</td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        <br><br>
     </div>
 
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,6 +51,15 @@ class Customers
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
+
+    #[ORM\OneToMany(targetEntity: ContactsCustomers::class, mappedBy: 'customer')]
+    private Collection $contactsCustomers;
+
+    public function __construct()
+    {
+        $this->contactsCustomer = new ArrayCollection();
+        $this->contactsCustomers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -198,4 +209,35 @@ class Customers
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, ContactsCustomers>
+     */
+    public function getContactsCustomers(): Collection
+    {
+        return $this->contactsCustomers;
+    }
+
+    public function addContactsCustomer(ContactsCustomers $contactsCustomer): static
+    {
+        if (!$this->contactsCustomers->contains($contactsCustomer)) {
+            $this->contactsCustomers->add($contactsCustomer);
+            $contactsCustomer->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactsCustomer(ContactsCustomers $contactsCustomer): static
+    {
+        if ($this->contactsCustomers->removeElement($contactsCustomer)) {
+            // set the owning side to null (unless already changed)
+            if ($contactsCustomer->getCustomer() === $this) {
+                $contactsCustomer->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

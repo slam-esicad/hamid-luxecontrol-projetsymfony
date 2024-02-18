@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\ContactsCustomers;
 use App\Entity\Customers;
 use App\Form\CarType;
+use App\Form\ContactType;
 use App\Form\CustomerType;
+use App\Repository\ContactsCustomersRepository;
 use App\Repository\CustomersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Tests\Models\TypedProperties\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,22 +53,39 @@ class CustomersController extends AbstractController
     }
 
     #[Route('/client/{id}', 'edit_customer')]
-    public function edit(EntityManagerInterface $entityManager, Request $request, Customers $customers, CustomersRepository $customersRepository): Response
+    public function edit(int $id, EntityManagerInterface $entityManager, Request $request, Customers $customers, CustomersRepository $customersRepository): Response
     {
+        $contact = new ContactsCustomers();
+
         $editCustomerForm = $this->createForm(CustomerType::class, $customers);
         $editCustomerForm->handleRequest($request);
+
+        $addContactForm = $this->createForm(ContactType::class, $contact);
+        $addContactForm->handleRequest($request);
+
+        if($addContactForm->isSubmitted() && $addContactForm->isValid())
+        {
+            $contact->setCustomer($customers);
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_edit_customer', [
+                'id' => $id
+            ]);
+        }
 
         if($editCustomerForm->isSubmitted() && $editCustomerForm->isValid())
         {
             $entityManager->persist($customers);
             $entityManager->flush();
             return $this->redirectToRoute('app_customers');
-
         }
 
         return $this->render('dashboard/edit_customer.html.twig', [
             'customer' => $customers,
-            'editCustomerForm' => $editCustomerForm
+            'editCustomerForm' => $editCustomerForm->createView(),
+            'addContactForm' => $addContactForm->createView(),
+            'contactsCustomers' => $customers->getContactsCustomers()
         ]);
     }
 
