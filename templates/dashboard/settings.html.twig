@@ -1,0 +1,61 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Réglages{% endblock %}
+
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Règlages</h1>
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Action</th>
+                <th>Marque</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr class="ui form">
+                {{ form_start(createBrandForm) }}
+
+                {{ form_errors(createBrandForm) }}
+                <td>
+                    <div class="field center aligned card">
+                        {{ form_row(createBrandForm.sub, {
+                            'label': 'Ajouter'
+                        }) }}
+                    </div>
+                </td>
+                <td>
+                    <div class="field">
+                        {{ form_row(createBrandForm.name) }}
+                    </div>
+                </td>
+
+                {{ form_end(createBrandForm) }}
+            </tr>
+
+            {% for brand in brands %}
+                <tr>
+
+                    <td class="center aligned card"><a href="{{ path('app_settings_edit_brand', {'id': brand.id}) }}"><i class="blue eye icon"></i></a> -
+                        <a href="{{ path('app_settings_delete_brand', {'id': brand.id}) }}"><i class="trash icon"></i></a></td>
+                    <td>
+                        {{ brand.name }}
+                    </td>
+                </tr>
+
+            {% endfor %}
+                <tr class="ui center aligned">
+                    <td><a href="{{ path('app_settings_brands') }}">Voir plus ...</a></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+{% endblock %}

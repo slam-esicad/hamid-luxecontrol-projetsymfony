@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CarsRepository;
 use App\Repository\ContractsRepository;
+use Cassandra\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +16,7 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'dashboard')]
     public function index(ContractsRepository $contractsRepository, CarsRepository $carsRepository): Response
     {
+
         $cars = $carsRepository->findAll();
 
         $ca = 0;

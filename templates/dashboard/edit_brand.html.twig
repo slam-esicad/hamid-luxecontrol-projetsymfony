@@ -1,0 +1,65 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Modifier le contact {{ contact.firstname ~ " " ~ contact.lastname }}{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Modifier le contact : {{ contact.firstname ~ " " ~ contact.lastname }}</h1>
+
+        <a href="{{ path('app_delete_contact', {'id': contact.id}) }}">
+            <button class="ui red button">Supprimer</button>
+        </a>
+
+
+        {{ component('Hr', { icon: 'user', text: 'Contact' }) }}
+
+        <div class="ui form">
+            {{ form_start(editContactForm) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="editContactForm_firstname">Prénom</label>
+                    {{ form_row(editContactForm.firstname) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Nom</label>
+                    {{ form_row(editContactForm.lastname) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Fonction</label>
+                    {{ form_row(editContactForm.function) }}
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="">Email</label>
+                    {{ form_row(editContactForm.email) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Numéro de téléphone</label>
+                    {{ form_row(editContactForm.phone) }}
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="">Commentaire</label>
+                {{ form_row(editContactForm.comment) }}
+            </div>
+
+            <div class="field">
+                {{ form_row(editContactForm.sub, {
+                    'label': 'Mettre à jour'
+                }) }}
+            </div>
+
+            {{ form_end(editContactForm) }}
+        </div>
+
+    </div>
+
+{% endblock %}
