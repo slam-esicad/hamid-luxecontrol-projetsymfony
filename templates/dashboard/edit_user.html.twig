@@ -1,0 +1,80 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Modifier l'utilisateur {{ user.name }}{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Modifier l'utilisateur : {{ user.name }}</h1>
+
+        <a href="{{ path('app_delete_contact', {'id': user.id}) }}">
+            <button class="ui red button">Supprimer</button>
+        </a>
+
+
+
+        <div class="ui form">
+            {{ form_start(editUserForm) }}
+
+            {{ component('Hr', { icon: 'user md', text: 'Rôles' }) }}
+
+            {% block css %}
+                <style>
+                    label[for=user_roles_0] {
+                        margin-right: 20px;
+                    }
+
+                    input[type=radio] {
+                        margin-right: 7px;
+                    }
+                </style>
+            {% endblock %}
+
+            <div class="field">
+                <div class="ui raised segment">
+                    <div class="inline fields" style="margin: 0;">
+                        <label for="user_roles_0">Rôle</label>
+                        {{ form_widget(editUserForm.roles) }}
+                    </div>
+                </div>
+
+            </div>
+
+            {{ component('Hr', { icon: 'user', text: 'Contact' }) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="editContactForm_firstname">Nom et prénom</label>
+                    {{ form_row(editUserForm.name) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Email</label>
+                    {{ form_row(editUserForm.email) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Mot de passe</label>
+                    {{ form_row(editUserForm.password) }}
+                </div>
+
+            </div>
+
+
+
+            <div class="field">
+                {{ form_row(editUserForm.sub, {
+                    'label': 'Mettre à jour'
+                }) }}
+            </div>
+
+            {{ form_end(editUserForm) }}
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}

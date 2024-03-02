@@ -1,0 +1,74 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Nouvel utilisateur{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 class="header inika">Nouvel utilisateur</h1>
+
+        <div class="ui form">
+            {{ form_start(createUserForm) }}
+
+            {{ component('Hr', { icon: 'user md', text: 'Rôles' }) }}
+
+            {% block css %}
+                <style>
+                    label[for=user_roles_0] {
+                        margin-right: 20px;
+                    }
+
+                    input[type=radio] {
+                        margin-right: 7px;
+                    }
+                </style>
+            {% endblock %}
+
+            <div class="field">
+                <div class="ui raised segment">
+                    <div class="inline fields" style="margin: 0;">
+                        <label for="user_roles_0">Rôle</label>
+                        {{ form_widget(createUserForm.roles) }}
+                    </div>
+                </div>
+
+            </div>
+
+            {{ component('Hr', { icon: 'user', text: 'Contact' }) }}
+
+            <div class="three fields">
+                <div class="field">
+                    <label for="editContactForm_firstname">Nom et prénom</label>
+                    {{ form_row(createUserForm.name) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Email</label>
+                    {{ form_row(createUserForm.email) }}
+                </div>
+
+                <div class="field">
+                    <label for="">Mot de passe</label>
+                    {{ form_row(createUserForm.password) }}
+                </div>
+
+            </div>
+
+
+
+            <div class="field">
+                {{ form_row(createUserForm.sub, {
+                    'label': 'Ajouter'
+                }) }}
+            </div>
+
+            {{ form_end(createUserForm) }}
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}

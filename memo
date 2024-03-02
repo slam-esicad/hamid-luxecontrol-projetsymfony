@@ -1,9 +1,21 @@
+Assistant Contrat :
+    - Mettre en "Terminé" tous les contrats à date échéante
+    - Rentrer dans un contrat rapidement
+
+Statistique :
+    - C.A. par année des locations
+    - C.A. par année des ventes
+
+
+
+import { startStimulusApp } from '@symfony/stimulus-bundle';
+
+const app = startStimulusApp();
+// register any custom, 3rd party controllers here
+// app.register('some_controller_name', SomeImportedController);
 
 
 
 
 
-
-
-
-
+import './bootstrap.js';

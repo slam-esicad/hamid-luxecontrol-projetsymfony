@@ -1,0 +1,159 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+
+    <div class="ui container">
+        <h1 color="red" class="header inika">Statistiques</h1>
+
+        <h3 class="ui header">
+            Période
+        </h3>
+        <div class="ui form">
+            {{ form_start(periodForm) }}
+
+            <div class="two fields">
+                <div class="field">
+                    <label for="date_statistics_startdate">Date de début</label>
+                    {{ form_row(periodForm.startdate) }}
+                </div>
+                <div class="field">
+                    <label for="date_statistics_enddate">Date de fin</label>
+                    {{ form_row(periodForm.enddate) }}
+                </div>
+            </div>
+            <div class="field">
+                {{ form_row(periodForm.submit) }}
+            </div>
+
+            {{ form_end(periodForm) }}
+        </div>
+
+        {{ render_chart(chart) }}
+
+        {{ component('Hr', {icon: '', text: ''}) }}
+
+        {% block css %}
+        <style>
+            .green_bg {background-color: var(--color-green) !important;}
+        </style>
+        {% endblock %}
+
+        <h3 class="ui header">Les 10 voitures les plus rentables en location (Pas de période)</h3>
+        <form method="POST"><table class="ui celled table">
+            <thead class="tr-head">
+                <tr class="tr-head">
+                    <th>Nombre de locations <button type="submit" name="tri_by_nb_loca" style="margin-left: 10px;padding: 5px !important;" class="ui teal button"><i style="margin:0 !important;" class="filter icon"></i></button></th>
+                    <th>Marque et modèle</th>
+                    <th>Matricule</th>
+                    <th>Couleur</th>
+                    <th>Km</th>
+                    <th>C.A.</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for c in top10ContractsRented %}
+                <tr>
+                    <td>{{ c.nb_con }}</td>
+                    <td>{{ c.name ~ ' ' ~ c.model }}</td>
+                    <td>{{ c.reg_number }}</td>
+                    <td>{{ c.color }}</td>
+                    <td>{{ c.km }}</td>
+                    <td class="green_bg">{{ c.price|format_currency('EUR') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table></form><br><br><br>
+
+
+
+        <div class="ui equal width grid">
+
+
+
+            <div class="field" style="width: 50%;">
+                <h3 class="ui header">C.A. par Client</h3>
+                <form method="post" class="ui form">
+                    <div class="field">
+                        <label for="">Nom ou raison sociale</label>
+                        <input type="text" name="search1" placeholder="Nom ou raison scoiale">
+                    </div>
+                    <div class="field">
+                        <input name="sub_search1" type="submit" class="ui clr_bg button" value="Rechercher">
+                    </div>
+                </form>
+                <table class="ui celled table">
+                    <thead class="tr-head">
+                    <tr class="tr-head">
+                        <th>Nom ou raison sociale</th>
+                        <th>Adresse</th>
+                        <th>Professionnel</th>
+                        <th>C.A.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td class="ui center">
+                                {% if customer.pro %}
+                                    <i class="fa fa-check"></i>
+                                {% else %}
+                                    <i class="fa fa-xmark"></i>
+                                {% endif %}
+                            </td>
+                            <td class="green_bg">{{ customer.total_contract_price|format_currency('EUR') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div class="field" style="width: 50%;">
+                <h3 class="ui header">C.A. par Voiture</h3>
+                <form method="post" class="ui form">
+                    <div class="field">
+                        <label for="">Matricule</label>
+                        <input type="text" name="search2" placeholder="Matricule">
+                    </div>
+                    <div class="field">
+                        <input name="sub_search2" type="submit" class="ui clr_bg button" value="Rechercher">
+                    </div>
+                </form>
+                <table class="ui celled table">
+                    <thead class="tr-head">
+                    <tr class="tr-head">
+                        <th>Marque et modèle</th>
+                        <th>Matricule</th>
+                        <th>P.de.location</th>
+                        <th>P.de.vente</th>
+                        <th>C.A.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for car in cars %}
+                        <tr>
+                            <td>{{ car.brand_name ~ ' ' ~ car.model }}</td>
+                            <td>{{ car.reg_number }}</td>
+                            <td>{{ car.dayprice }}</td>
+                            <td>{{ car.buyprice }}</td>
+                            <td class="green_bg">{{ car.total_contract_price|format_currency('EUR') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div><br><br>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('js/StatisticCAByMonthsChart.js') }}"></script>
+{% endblock %}

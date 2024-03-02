@@ -21,6 +21,29 @@ class CustomersRepository extends ServiceEntityRepository
         parent::__construct($registry, Customers::class);
     }
 
+    public function getCaOfClientFromWord($column, $keyword): mixed
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.name, c.address, c.pro, SUM(ct.price) as total_contract_price')
+            ->leftJoin('c.contracts', 'ct')  // Utilisation de LEFT JOIN pour inclure les clients même s'ils n'ont pas de contrats
+            ->where('c.' . $column . ' LIKE :key')
+            ->setParameter('key', '%' . $keyword . '%')
+            ->groupBy('c.id')  // Groupement par l'ID du client pour obtenir une ligne par client
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /*public function getCAOfCustomer()
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('id, contract.price')
+            ->innerJoin('App\Entity\Contracts', 'contract', 'contract.customer = a.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }*/
+
 //    /**
 //     * @return Customers[] Returns an array of Customers objects
 //     */

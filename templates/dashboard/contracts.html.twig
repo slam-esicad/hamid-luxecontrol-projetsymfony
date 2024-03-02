@@ -74,10 +74,100 @@
             </tr>
             </tbody>
         </table>
+
+
+
+        {{ component('Hr', {icon: 'magic', text: 'Assistant contract'}) }}
+
+        <div class="ui form">
+            <div class="three fields">
+                <div class="field">
+                    <button id="assistant_finish_contracts" class="ui pink labeled icon button">
+                            <i class="undo icon"></i>
+                            Clôturer les contrats arrivés à échéances
+                    </button>
+                </div>
+
+                <div class="field">
+                    <button id="assistant_search" class="ui blue labeled icon button">
+                        <i class="search icon"></i>
+                        Trouver rapidement
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="ui search mini modal">
+        <div class="header">Trouver rapidement</div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label for="num">N° du contrat</label>
+                    <input type="text" placeholder="N° du contrat" id="num">
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve blue button">Aller à</div>
+            <div class="ui cancel gray button">Annuler</div>
+        </div>
+    </div>
+
+    <div class="ui finish contracts mini modal">
+        <div class="header">Terminer les contrats</div>
+        <div class="content">
+            Voulez-vous terminer tous les contrats arrivés à échéances ?
+        </div><br>
+        <div class="actions">
+            <div class="ui approve pink button">Oui</div>
+            <div class="ui cancel gray button">Annuler</div>
+        </div>
     </div>
 
 {% endblock %}
 
 {% block js %}
+
+    <script>
+        var assistant_search = document.getElementById('assistant_search')
+        var assistant_finish_contracts = document.getElementById('assistant_finish_contracts')
+
+        assistant_search.addEventListener('click', () => {
+            $('.ui.search.modal')
+                .modal({
+                    onDeny: () => {
+                        $('.ui.model').modal('hide')
+                    },
+                    onApprove: () => {
+                        window.location = 'contrat/' + document.getElementById('num').value
+                    }
+                })
+                .modal('show')
+            ;
+        })
+
+        assistant_finish_contracts.addEventListener('click', () => {
+            $('.ui.finish.contracts.modal')
+                .modal({
+                    onDeny: () => {
+                        $('.ui.model').modal('hide')
+                    },
+                    onApprove: () => {
+                        window.location = 'contrats/magic/terminer-echeances'
+                    }
+                })
+                .modal('show')
+            ;
+        })
+    </script>
 
 {% endblock %}

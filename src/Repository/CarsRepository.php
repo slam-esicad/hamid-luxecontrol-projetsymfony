@@ -21,6 +21,20 @@ class CarsRepository extends ServiceEntityRepository
         parent::__construct($registry, Cars::class);
     }
 
+    public function getCarInfoWithContractPricesAndBrand(string $regNumber): mixed
+    {
+        $query = $this->createQueryBuilder('car')
+            ->select('car.model, car.dayprice, car.buyprice, car.reg_number, car.color, car.km, brand.name as brand_name, SUM(contract.price) as total_contract_price')
+            ->leftJoin('car.contracts', 'contract') // LEFT JOIN pour inclure également les voitures sans contrats
+            ->leftJoin('car.brand', 'brand') // Jointure avec la table Brands pour récupérer le nom de la marque
+            ->where('car.reg_number = :regNumber')
+            ->setParameter('regNumber', $regNumber)
+            ->groupBy('car.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Cars[] Returns an array of Cars objects
 //     */

@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Contracts;
+use App\Entity\Cars;
+use App\Entity\Brands;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +21,34 @@ class ContractsRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Contracts::class);
+    }
+
+    /**
+     * @return \mixed[][] Retuens an array of top 10 contracts
+     */
+    public function find10BestRentedCars()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT name, model, reg_number, color, km, price, COUNT(car_id) as 'nb_con', SUM(price) as 'price' FROM `contracts` INNER JOIN `cars` ON car_id = cars.id INNER JOIN `brands` ON cars.brand_id = brands.id GROUP BY car_id ORDER BY SUM(price) DESC LIMIT 10;";
+
+        $stmt = $conn->prepare($sql);
+
+        $r = $stmt->executeQuery();
+
+        return $r->fetchAllAssociative();
+    }
+
+
+    public function find10BestCars()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "SELECT name, model, reg_number, color, km, price, COUNT(car_id) as 'nb_con', SUM(price) as 'price' FROM `contracts` INNER JOIN `cars` ON car_id = cars.id INNER JOIN `brands` ON cars.brand_id = brands.id GROUP BY car_id ORDER BY COUNT(car_id) DESC LIMIT 10;";
+
+        $stmt = $conn->prepare($sql);
+
+        $r = $stmt->executeQuery();
+
+        return $r->fetchAllAssociative();
     }
 
 //    /**

@@ -8,6 +8,8 @@
     <div class="ui container">
         <h1 class="header inika">Règlages</h1>
 
+        <h3 class="header">Marques</h3>
+
         <table class="ui celled table">
             <thead class="tr-head">
             <tr class="tr-head">
@@ -56,6 +58,52 @@
             </tbody>
         </table>
         <br>
+
+        <h3 class="header">Utilisateurs</h3>
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Action</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Rôles</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <tr>
+
+            </tr>
+
+            {% for user in users %}
+                <tr>
+
+                    <td class="center aligned card"><a href="{{ path('app_settings_users', {'id': user.id}) }}"><i class="blue eye icon"></i></a> -
+                        <a href="{{ path('app_settings_users', {'id': user.id}) }}"><i class="trash icon"></i></a></td>
+                    <td>
+                        {{ user.name }}
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {{ '[' }}
+                        {% for role in user.roles %}
+                             {{ role ~ ', ' }}
+                        {% endfor %}
+                            {{ ']' }}
+                    </td>
+                </tr>
+
+            {% endfor %}
+            <tr class="ui center aligned">
+                <td><a href="{{ path('app_settings_create_user') }}">Créer un nouvel utilisateur</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}

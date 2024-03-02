@@ -85,29 +85,32 @@
                 </div>
             </div>
 
-            <div class="three fields">
+            <div class="field">
+                <label for="contract_comment">Commentaire</label>
+                {{ form_row(editContractForm.description) }}
+            </div>
+
+            {{ component('Hr', {icon: 'euro', text:'Prix'}) }}
+
+            <div class="five fields">
+                <div class="field">
+                    <label>Nombre de jours</label>
+                    <input type="number" id="nb_days">
+                </div>
+
                 <div class="field">
                     <label for="contract_price">Prix du contract</label>
                     {{ form_row(editContractForm.price) }}
                 </div>
 
-                <div class="three fields">
-                    <div class="field">
-                        <label for="pdv">Prix de vente</label>
-                        <span id="btn_pdv" class="ui teal button">PDV</span>
-                    </div>
-                    <div class="field">
-                        <label for="pdv">Prix de location</label>
-                        <span id="btn_day" class="ui pink button">Location</span>
-                    </div>
+                <div class="field">
+                    <label for="pdv">Prix de vente</label>
+                    <span id="btn_pdv" class="ui teal button">PDV</span>
                 </div>
             </div>
 
 
-            <div class="field">
-                <label for="contract_comment">Commentaire</label>
-                {{ form_row(editContractForm.description) }}
-            </div>
+
 
 
             <div class="field">
@@ -118,7 +121,7 @@
 
             {{ form_end(editContractForm) }}
         </div>
-    </div>
+    </div><br>
 
 {% endblock %}
 
@@ -129,8 +132,8 @@
             document.getElementById('contract_price').value = document.getElementById('valueofbuyprice').title
         })
 
-        $('#btn_day').click(() => {
-            document.getElementById('contract_price').value = parseInt(document.getElementById('contract_price').value) + parseInt(document.getElementById('valueofdayprice').title)
+        $('#nb_days').on('change', () => {
+            document.getElementById('contract_price').value = document.getElementById('valueofdayprice').title * document.getElementById('nb_days').value
         })
     </script>
 

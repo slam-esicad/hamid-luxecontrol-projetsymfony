@@ -16,7 +16,6 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'dashboard')]
     public function index(ContractsRepository $contractsRepository, CarsRepository $carsRepository): Response
     {
-
         $cars = $carsRepository->findAll();
 
         $ca = 0;
