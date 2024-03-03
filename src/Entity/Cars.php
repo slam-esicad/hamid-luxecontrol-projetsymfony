@@ -64,6 +64,9 @@ class Cars
     #[ORM\OneToMany(targetEntity: Contracts::class, mappedBy: 'car')]
     private Collection $contracts;
 
+    #[ORM\Column]
+    private ?bool $selled = null;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -280,6 +283,18 @@ class Cars
                 $contract->setCar(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isSelled(): ?bool
+    {
+        return $this->selled;
+    }
+
+    public function setSelled(bool $selled): static
+    {
+        $this->selled = $selled;
 
         return $this;
     }

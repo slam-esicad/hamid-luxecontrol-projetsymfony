@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contracts;
 use App\Form\ContractType;
+use App\Repository\CarsRepository;
 use App\Repository\ContractsRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,7 +39,7 @@ class ContractsController extends AbstractController
     }
 
     #[Route('/contrat/nouveau', 'create_contract')]
-    public function create(ContractsRepository $contractsRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function create(CarsRepository $carsRepository, ContractsRepository $contractsRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $contract = new Contracts();
 
@@ -58,10 +59,26 @@ class ContractsController extends AbstractController
                     if (($contract->getStartdate() >= $exist->getStartdate() && $contract->getStartdate() <= $exist->getEnddate()) || ($contract->getEnddate() >= $exist->getStartdate() && $contract->getEnddate() <= $exist->getEnddate())) {
                         $this->addFlash('error', 'Une location est déjà en cours sur cette voiture sur le contrat n°' . $exist->getId() . ' (du ' . date_format($exist->getStartdate(), 'd/m/Y') . ' au ' . date_format($exist->getEnddate(), 'd/m/Y') . ')');
                         break;
-                    } else { $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts'); }
+                    } else {
+                        if($contract->getType() == 0) {
+                            $car = $carsRepository->find($contract->getCar());
+                            $car->setSelled(true);
+                            $entityManager->persist($car);
+                            $entityManager->flush();
+                            $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts');
+                        }
+                    }
                 }
             }
-            else { $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts'); }
+            else {
+                if($contract->getType() == 0) {
+                    $car = $carsRepository->find($contract->getCar());
+                    $car->setSelled(true);
+                    $entityManager->persist($car);
+                    $entityManager->flush();
+                    $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts');
+                }
+            }
         }
 
         return $this->render('dashboard/create_contract.html.twig', [
@@ -91,23 +108,52 @@ class ContractsController extends AbstractController
         $editContractForm = $this->createForm(ContractType::class, $contracts);
         $editContractForm->handleRequest($request);
 
+
         if($editContractForm->isSubmitted() && $editContractForm->isValid())
         {
-            $exists = $contractsRepository->findBy([
-                'car' => $contracts->getCar()->getId()
-            ]);
 
-            if(count($exists) >= 1)
+
+            if($contracts->getType() == 1)
             {
-                foreach ($exists as $exist) {
-                    if (($contracts->getStartdate() >= $exist->getStartdate() && $contracts->getStartdate() <= $exist->getEnddate()) || ($contracts->getEnddate() >= $exist->getStartdate() && $contracts->getEnddate() <= $exist->getEnddate())) {
-                        $this->addFlash('error', 'Une location est déjà en cours sur cette voiture sur le contrat n°' . $exist->getId() . ' (du ' . date_format($exist->getStartdate(), 'd/m/Y') . ' au ' . date_format($exist->getEnddate(), 'd/m/Y') . ')');
-                        break;
-                    } else { $this->directAdd($contracts, $entityManager, $contracts->getPrice()); return $this->redirectToRoute('app_contracts'); }
+                $exists = $contractsRepository->findBy([
+                    'car' => $contracts->getCar()->getId()
+                ]);
+
+
+
+                if(count($exists) >= 1)
+                {
+                    $i = 0;
+                    foreach ($exists as $exist) {
+
+                        if (($contracts->getStartdate() >= $exist->getStartdate() && $contracts->getStartdate() <= $exist->getEnddate()) || ($contracts->getEnddate() >= $exist->getStartdate() && $contracts->getEnddate() <= $exist->getEnddate())) {
+
+                            if($contracts->getId() == $exist->getId())
+                            {
+                                $i = 0;
+                            } else {
+                                $i++;
+                            }
+
+                        }
+                    }
+
+                    if($i == 0)
+                    {
+                        $this->directAdd($contracts, $entityManager, $contracts->getPrice());
+                        return $this->redirectToRoute('app_contracts');
+                    } else {
+                        $this->addFlash('error', 'Une location est déjà en cours.');
+                        return $this->redirectToRoute('app_contracts');
+                    }
+
+
                 }
             }
-            else { $this->directAdd($contracts, $entityManager); return $this->redirectToRoute('app_contracts'); }
+
+
         }
+
 
         return $this->render('dashboard/edit_contract.html.twig', [
             'editContractForm' => $editContractForm,

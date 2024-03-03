@@ -1,12 +1,13 @@
 :root {
     --color-gray: #333333;
     --color-red: #C53D45;
-    --color-green: #4BBE4F;
+    --color-green: darkseagreen;
     --color-bg: #202739;
+    --color-fond: #f4f8fa;
 }
 
 body {
-    background-color: #f4f8fa;
+    background-color: var(--color-fond);
     font-family: "Inter", serif;
 }
 
@@ -102,3 +103,15 @@ thead .tr-head > th {background-color: var(--color-bg) !important; color: white 
 .preambule {
     font-size: 25px !important;
 }
+
+#rentedByMonthChart {
+    margin: auto;
+    height: 500px !important;
+}
+
+#CAGlobalChart {
+    margin: auto;
+    height: 500px !important;
+}
+
+.sidebaricon {font-size: 20px !important;}

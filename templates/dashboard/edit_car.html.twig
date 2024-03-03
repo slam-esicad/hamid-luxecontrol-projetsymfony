@@ -15,6 +15,17 @@
             <button class="ui red button">Supprimer</button>
         </a>
 
+        {{ component('Hr', { icon: 'tags', text: 'Etats' }) }}
+
+        <div class="ui form">
+           <div class="field">
+               <div class="ui checkbox">
+                   <input {{ checked ? 'checked' : '' }} type="checkbox" name="selled" id="selled" disabled>
+                   <label for="selled">Vendu</label>
+               </div>
+           </div>
+        </div>
+
         {{ component('Hr', { icon: 'circle info', text: 'Information de la voiture' }) }}
 
         <div class="ui form">

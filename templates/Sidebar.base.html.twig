@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/NPM/@simondmc/popup-js@1.4.2/popup.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Italianno&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inika&family=Inter:wght@200;300;400;500;600;700&family=Italianno&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ asset('img/logo.ico') }}">
@@ -25,13 +24,13 @@
     <div class="ui inverted secondary pointing menu menu-top">
         <a class="title-top" href="{{ path('app_home') }}">Luxe Control</a>
     </div>
-    <a class="item" href="{{ path('app_dashboard') }}"><i class="fa fa-igloo"></i> <span>Dashboard</span> <i class="arrow right icon"></i></a>
-    <a class="item" href="{{ path('app_cars') }}"><i class="fa fa-car"></i> <span>Voitures</span> <i class="arrow right icon"></i></a>
-    <a class="item" href="{{ path('app_customers') }}"><i class="fa fa-user"></i> <span>Clients</span> <i class="arrow right icon"></i></a>
-    <a class="item" href="{{ path('app_contracts') }}"><i class="fa fa-file-contract"></i> <span>Contrats</span> <i class="arrow right icon"></i></a>
-    <a href="{{ path('app_statistics') }}" class="item"><i class="fa fa-chart-bar"></i> <span>Statistiques</span> <i class="arrow right icon"></i></a>
-    <a href="{{ path('app_settings') }}" class="item"><i class="fa fa-cog"></i> <span>Règlages</span> <i class="arrow right icon"></i></a>
-    <a class="item" href="{{ path('app_logout') }}"><i class="fa fa-door-open"></i> <span>Déconnexion</span> <i class="arrow right icon"></i></a>
+    <a class="item" href="{{ path('app_dashboard') }}"> <span><i class="sidebaricon cloud icon"></i> Dashboard</span> <i class="chevron right icon"></i></a>
+    <a class="item" href="{{ path('app_cars') }}"> <span><i class="sidebaricon car icon"></i> Voitures</span> <i class="chevron right icon"></i></a>
+    <a class="item" href="{{ path('app_customers') }}"> <span><i class="sidebaricon user icon"></i> Clients</span> <i class="chevron right icon"></i></a>
+    <a class="item" href="{{ path('app_contracts') }}"> <span> <i class="sidebaricon folder icon"></i>Contrats</span> <i class="chevron right icon"></i></a>
+    <a href="{{ path('app_statistics') }}" class="item"> <span><i class="sidebaricon chart pie icon"></i> Statistiques</span> <i class="chevron right icon"></i></a>
+    <a href="{{ path('app_settings') }}" class="item"> <span> <i class="sidebaricon cog icon"></i>Règlages</span> <i class="chevron right icon"></i></a>
+    <a class="item" href="{{ path('app_logout') }}"> <span><i class="sidebaricon sign-out icon"></i> Déconnexion</span> <i class="chevron right icon"></i></a>
 
     <div class="popupa">
         Notes
@@ -42,6 +41,7 @@
 {% block body %}{% endblock %}
 
 {% block js %}
+    <script src="{{ asset('js/StatisticCAByMonthsChart.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/api.min.js"></script>
 {% endblock %}
 </body>

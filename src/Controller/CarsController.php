@@ -96,12 +96,12 @@ class CarsController extends AbstractController
 
             return $this->redirectToRoute('app_cars');
 
-
         }
 
         return $this->render('dashboard/edit_car.html.twig', [
             'createCarForm' => $editCarForm->createView(),
-            'car' => $cars
+            'car' => $cars,
+            'checked' => (bool)$cars->isSelled()
         ]);
     }
 

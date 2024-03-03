@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="ui container">
+    <div {{ stimulus_controller('hello') }} class="ui container">
         <h1 color="red" class="header inika">Statistiques</h1>
 
         <h3 class="ui header">
@@ -15,22 +15,21 @@
 
             <div class="two fields">
                 <div class="field">
-                    <label for="date_statistics_startdate">Date de début</label>
-                    {{ form_row(periodForm.startdate) }}
+                    <label for="date_statistics_year">Année</label>
+                    {{ form_row(periodForm.year) }}
                 </div>
                 <div class="field">
-                    <label for="date_statistics_enddate">Date de fin</label>
-                    {{ form_row(periodForm.enddate) }}
+                    <label for="" style="color: var(--color-fond)">Valider</label>
+                    {{ form_row(periodForm.submit) }}
                 </div>
             </div>
-            <div class="field">
-                {{ form_row(periodForm.submit) }}
-            </div>
+
 
             {{ form_end(periodForm) }}
         </div>
 
-        {{ render_chart(chart) }}
+        <h3 class="ui header">C.A. des locations par mois pour l'année : {{ year }}</h3>
+        <div><canvas id="rentedByMonthChart"></canvas></div>
 
         {{ component('Hr', {icon: '', text: ''}) }}
 
@@ -150,10 +149,49 @@
 
 
         </div>
+        <br><br>
+
+        <h3 class="ui header">C.A. Global de {{ year }} : <span class="ui green">{{ caOfYear|format_currency('EUR') }}</span></h3>
+        <canvas id="CAGlobalChart"></canvas>
     </div><br><br>
 
 {% endblock %}
 
 {% block js %}
-    <script src="{{ asset('js/StatisticCAByMonthsChart.js') }}"></script>
+    <script>
+        const ctxRentedByMonthChart = document.getElementById('rentedByMonthChart');
+        const ctxCAGlobalChart = document.getElementById('CAGlobalChart')
+
+        new Chart(ctxRentedByMonthChart, {
+            type: 'bar',
+            data: {
+                labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                datasets: [{
+                    label: 'C.A. en € des locations par mois',
+                    data: {{ totalPricesByMonth|raw }},
+                    borderWidth: 2,
+                    borderColor: '#fff',
+                    backgroundColor: '#202739',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        new Chart(ctxCAGlobalChart, {
+            type: 'doughnut',
+            data: {
+                labels: ['Locations', 'Ventes'],
+                datasets: [{
+                    label: 'C.A. Global',
+                    data: {{ CAGlobal|raw }},
+                    borderWidth: 0,
+                }]
+            }
+        });
+    </script>
 {% endblock %}

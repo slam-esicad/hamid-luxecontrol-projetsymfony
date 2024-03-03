@@ -17,6 +17,10 @@
             </button>
         </a>
 
+        {% for msg in app.flashes('error') %}
+            {{ component('Alert', {type: 'error', text: msg}) }}
+        {% endfor %}
+
 
         <table class="ui celled table">
             <thead class="tr-head">
@@ -69,7 +73,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="background-color: darkseagreen">{{ total_prices|format_currency('EUR') }}</td>
+                <td style="background-color: var(--color-green)">{{ total_prices|format_currency('EUR') }}</td>
                 <td></td>
             </tr>
             </tbody>

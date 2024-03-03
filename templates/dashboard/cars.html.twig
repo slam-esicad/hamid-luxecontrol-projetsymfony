@@ -8,14 +8,6 @@
 
     <div class="ui container">
 
-        {% for msg in app.flashes('success') %}
-            {{ component('Alert', {type: 'success', text: msg}) }}
-        {% endfor %}
-
-        {% for msg in app.flashes('error') %}
-            {{ component('Alert', {type: 'error', text: msg}) }}
-        {% endfor %}
-
         <h1 class="header inika">Liste des voitures</h1>
 
         <p>{{ cars_list|length }} voitures au total</p>
@@ -26,8 +18,6 @@
                 Nouvelle
             </button>
         </a>
-
-
 
         <br><br>
 
@@ -45,28 +35,31 @@
             <thead class="tr-head">
             <tr class="tr-head">
                 <th>Voir</th>
-                <th>Visuel</th>
                 <th>Marque</th>
                 <th>Modèle</th>
+                <th>Année</th>
                 <th>Couleur</th>
                 <th>KMs</th>
+                <th>Puissance (ch)</th>
+                <th>Prix journalier</th>
+                <th>Prix de vente</th>
+                <th>Etat</th>
             </tr>
             </thead>
             <tbody>
             {% for car in cars_list %}
-                <tr>
+                <tr {{ car.selled ? 'style="background-color: #ce8388;"' : '' }}>
                     <td class="center aligned card"><a href="{{ path('app_edit_car', {'id': car.id}) }}"><i class="blue eye icon"></i></a></td>
-
-                    <td>
-                        <div class="img_car_column">
-                            <div style="background: no-repeat center url({{ asset('uploads/' ~ car.img) }}); background-size: cover; width: 500px;height: 200px; border-radius: 15px;"></div>
-                        </div>
-                    </td>
 
                     <td>{{ car.brand.name }}</td>
                     <td>{{ car.model }}</td>
+                    <td>{{ car.year }}</td>
                     <td>{{ car.color }}</td>
                     <td>{{ car.km }}</td>
+                    <td>{{ car.horsepower }}</td>
+                    <td>{{ car.dayprice|format_currency('EUR') }}</td>
+                    <td>{{ car.buyprice|format_currency('EUR') }}</td>
+                    <td>{{ car.selled ? 'Vendue' : '' }}</td>
 
                 </tr>
             {% endfor %}

@@ -11,28 +11,57 @@
         <div class="ui three column grid">
             <div class="column">
                 <div class="ui fluid cart">
-                    <div class="content">
-                        <i class="blue icon_card fa fa-car"></i>
-                        <h2 class="header bold">4</h2>
-                        <p>Locations en cours, sur <b>{{ nb_cars }}</b> voitures</p>
+                    <div class="ui one statistics content">
+                        <div class="statistic">
+                            <div class="value">
+                                <i class="blue car icon"></i> {{ nb_cars }}
+                            </div>
+                            <div class="label">
+                                Voitures
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="column">
                 <div class="ui fluid cart">
-                    <div class="content">
-                        <i class="green icon_card fa fa-users"></i>
-                        <h2 class="header bold">1 832</h2>
-                        <p>Clients</p>
+                    <div class="ui one statistics content">
+                        <div class="statistic">
+                            <div class="value">
+                                <i class="green users icon"></i> {{ nb_customers }}
+                            </div>
+                            <div class="label">
+                                Clients
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="column">
                 <div class="ui fluid cart">
-                    <div class="content">
-                        <i class="yellow icon_card fa fa-hand-holding-dollar"></i>
-                        <h2 class="header">{{ ca|format_currency('EUR') }}</h2>
-                        <p>Chiffre d'affaire cette année</p>
+                    <div class="ui one statistics content">
+                        <div class="statistic">
+                            <div class="value">
+                                <i class="red folder icon"></i> {{ nb_contracts }}
+                            </div>
+                            <div class="label">
+                                Contrats en cours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui fluid cart">
+                    <div class="ui one statistics content">
+                        <div class="statistic">
+                            <div class="value">
+                                <i class="yellow money icon"></i> {{ ca|format_currency('EUR') }}
+                            </div>
+                            <div class="label">
+                                C.A cette année
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

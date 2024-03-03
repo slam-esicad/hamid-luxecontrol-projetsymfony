@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Cars;
 use App\Entity\Contracts;
 use App\Entity\Customers;
+use App\Repository\CarsRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -66,7 +67,12 @@ class ContractType extends AbstractType
                 'choice_label' => function(Cars $cars) {
                     return $cars->getBrand()->getName() . ' ' . $cars->getModel();
                 },
-                'label' => false
+                'label' => false,
+                'query_builder' => function (CarsRepository $carsRepository) {
+                    return $carsRepository->createQueryBuilder('car')
+                        ->where('car.selled = :selled')
+                        ->setParameter('selled', false);
+                }
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
