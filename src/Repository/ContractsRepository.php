@@ -23,6 +23,7 @@ class ContractsRepository extends ServiceEntityRepository
         parent::__construct($registry, Contracts::class);
     }
 
+
     /**
      * @return \mixed[][] Retuens an array of top 10 contracts
      */

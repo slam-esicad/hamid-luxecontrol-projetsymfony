@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CarsRepository::class)]
 class Cars
@@ -14,57 +15,74 @@ class Cars
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['cars.index'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['cars.index'])]
     private ?string $model = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['cars.index'])]
     private ?string $img = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['cars.index'])]
     private ?int $km = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['cars.index'])]
     private ?string $reg_number = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['cars.index'])]
     private ?string $comment = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['cars.index'])]
     private ?string $energy = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['cars.index'])]
     private ?int $tank = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['cars.index'])]
     private ?int $horsepower = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['cars.index'])]
     private ?string $gearbox = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['cars.index'])]
     private ?int $doors = null;
 
     #[ORM\Column]
+    #[Groups(['cars.index'])]
     private ?int $dayprice = null;
 
     #[ORM\Column]
+    #[Groups(['cars.index'])]
     private ?int $buyprice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['cars.index'])]
     private ?int $year = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['cars.index'])]
     private ?string $color = null;
 
     #[ORM\ManyToOne(inversedBy: 'cars')]
+    #[Groups(['cars.index'])]
     private ?Brands $brand = null;
 
     #[ORM\OneToMany(targetEntity: Contracts::class, mappedBy: 'car')]
     private Collection $contracts;
 
     #[ORM\Column]
+    #[Groups(['cars.index'])]
     private ?bool $selled = null;
 
     public function __construct()

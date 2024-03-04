@@ -66,6 +66,8 @@ class ContractsController extends AbstractController
                             $entityManager->persist($car);
                             $entityManager->flush();
                             $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts');
+                        } else {
+                            $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts');
                         }
                     }
                 }
@@ -112,9 +114,6 @@ class ContractsController extends AbstractController
         if($editContractForm->isSubmitted() && $editContractForm->isValid())
         {
 
-
-            if($contracts->getType() == 1)
-            {
                 $exists = $contractsRepository->findBy([
                     'car' => $contracts->getCar()->getId()
                 ]);
@@ -149,7 +148,6 @@ class ContractsController extends AbstractController
 
 
                 }
-            }
 
 
         }

@@ -1,10 +1,15 @@
 {% extends 'Sidebar.base.html.twig' %}
 
+
 {% block title %}Nouveau contract{% endblock %}
 
 {% block body %}
 
     <div class="ui container">
+        {% for msg in app.flashes('error') %}
+            {{ component('Alert', {type: 'error', text: msg}) }}
+        {% endfor %}
+
         <h1 class="header inika">Nouveau contrat</h1>
 
         {% for msg in app.flashes('error') %}
