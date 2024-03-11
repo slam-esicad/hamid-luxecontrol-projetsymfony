@@ -51,6 +51,7 @@ class CarsController extends AbstractController
                 }
 
             }
+            $car->setSelled(false);
             $entityManager->persist($car);
             $entityManager->flush();
 

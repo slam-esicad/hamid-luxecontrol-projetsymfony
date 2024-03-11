@@ -1,2 +1,9 @@
 Assistant Voitures :
     - Pouvoir voir si une voiture est disponible à la location sur une certaine période ou non
+
+Incidents
+    - Bouton avec un formualire pour la gestion des incidents (entité incidents)
+Scripts Sauvegarde
+Logs (Logs d'utilisateurs --> entité logs)
+Tests Unitaires
+Git (Docs des commandes)
