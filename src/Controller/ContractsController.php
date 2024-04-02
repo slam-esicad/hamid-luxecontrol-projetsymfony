@@ -81,6 +81,8 @@ class ContractsController extends AbstractController
                     $entityManager->persist($car);
                     $entityManager->flush();
                     $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts');
+                } else {
+                    $this->directAdd($contract, $entityManager); return $this->redirectToRoute('app_contracts');
                 }
             }
         }

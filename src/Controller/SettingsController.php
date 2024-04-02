@@ -71,11 +71,15 @@ class SettingsController extends AbstractController
 
         if($createBrandForm->isSubmitted() && $createBrandForm->isValid())
         {
+            $entityManager->persist($brands);
+            $entityManager->flush();
 
+            return $this->redirectToRoute('app_settings');
         }
 
         return $this->render('dashboard/edit_brand.html.twig', [
-            'createBrandForm' => $createBrandForm
+            'createBrandForm' => $createBrandForm,
+            'brand' => $brands
         ]);
     }
 
