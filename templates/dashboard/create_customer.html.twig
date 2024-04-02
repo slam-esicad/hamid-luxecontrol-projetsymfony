@@ -64,9 +64,14 @@
             </div>
 
             <div class="ui checkbox">
-                {{ form_widget(createCustomerForm.pro) }}
+                {{ form_widget(createCustomerForm.pro, {
+                    'attr': {
+                        'class': 'form-pro-check'
+                    }
+                }) }}
                 <label for="customer_pro">Pro</label>
             </div>
+            <br><br>
 
             <div class="two fields">
                 <div class="field form-pro-siret">
