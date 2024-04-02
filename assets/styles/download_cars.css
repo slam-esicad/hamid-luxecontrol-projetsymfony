@@ -1,0 +1,69 @@
+:root {
+
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: #fafdff;
+}
+
+.bloc {
+    margin: 20px;
+    padding-bottom: 50px;
+}
+
+.ui.fixed.inverted.segment.menu-top {
+    margin: 0 !important;
+}
+
+#top {
+    margin-top: 0 !important;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    justify-items: center
+}
+
+#top #logo img {
+    height: 200px;
+}
+
+#top .title h3 {
+    font-size: 40px;
+    color: var(--color-bg);
+}
+
+
+#principale, #img, #stats {border: 1px solid black}
+
+#principale {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+#principale #infos {
+    padding: 30px;
+    border-right: 2px solid black;
+}
+
+#principale #prix {
+    padding: 30px;
+}
+
+#principale #prix h3 {
+    color: var(--color-bg);
+    font-size: 30px;
+}
+
+#img {
+    text-align: center;
+}
+
+#img img {
+    height: 300px;
+}
+
+#stats h2 {
+    text-decoration: underline;
+}

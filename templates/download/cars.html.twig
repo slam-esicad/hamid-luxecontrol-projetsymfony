@@ -1,0 +1,138 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche voiture : {{ car.brand.name ~ ' ' ~ car.model }}</title>
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/download_cars.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+
+    <style>
+        :root {
+
+        }
+
+        html, body {
+            padding: 0;
+            margin: 0;
+            background-color: #fafdff;
+            font-family: sans-serif;
+        }
+
+        .bloc {
+            margin: 20px;
+            padding-bottom: 50px;
+        }
+
+        .ui.fixed.inverted.segment.menu-top {
+            margin: 0 !important;
+        }
+
+        #top {
+            margin-top: 0 !important;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            align-items: center;
+            justify-items: center
+        }
+
+        #top #logo img {
+            height: 200px;
+        }
+
+        #top .title h3 {
+            font-size: 40px;
+            color: var(--color-bg);
+        }
+
+
+        #principale, #img, #stats {border: 1px solid black}
+
+        #principale {
+            display: grid;
+            grid-template-columns: 70% 30%;
+        }
+
+        #principale #infos {
+            padding: 30px;
+            border-right: 2px solid black;
+        }
+
+        #principale #prix {
+            padding: 30px;
+        }
+
+        #principale #prix h3 {
+            color: var(--color-bg);
+            font-size: 30px;
+        }
+
+        #img {
+            text-align: center;
+        }
+
+        #img img {
+            height: 300px;
+        }
+
+        #stats h2 {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="bloc">
+    <div id="top">
+        <div id="logo">
+            <img src="{{ absolute_url(asset('img/logo.png')) }}" alt="Logo Luxe Control">
+        </div>
+        <div class="title">
+            <h3 class="ui header">Fiche voiture</h3>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="principale">
+            <div id="infos">
+                <p>{{ car.brand.name ~ " " ~ car.model }}</p>
+                <p>Année : {{ car.year }}</p>
+            </div>
+
+            <div id="prix">
+                <h3 class="ui header">{{ car.buyprice|format_currency('EUR') }}</h3>
+                <h4 class="ui header">Ou {{ car.dayprice|format_currency('EUR') ~ " à la location journalière" }}</h4>
+            </div>
+        </div>
+        <br>
+
+        <div id="img">
+            <img src="{{ asset('uploads/' ~ car.img) }}" alt="Image de la voiture">
+        </div>
+        <br>
+
+        <div id="stats">
+            <h2 class="ui header">Caractéristiques :</h2>
+
+            <ul>
+                <li>Marque : <span class="bold">{{ car.brand.name }}</span></li>
+                <li>Modèle : <span class="bold">{{ car.model }}</span></li>
+                <li>Kilométrage : <span class="bold">{{ car.km }} Km</span></li>
+                <li>Immatriculation : <span class="bold">{{ car.regNumber }}</span></li>
+                <li>Carburant : <span class="bold">{{ car.energy }}</span></li>
+                <li>Capacité (en L) : <span class="bold">{{ car.tank }} L</span></li>
+                <li>Puissance : <span class="bold">{{ car.horsepower }} Ch</span></li>
+                <li>Boîte de vitesse : <span class="bold">{{ car.gearbox }}</span></li>
+                <li>Portes : <span class="bold">{{ car.doors }} portes</span></li>
+                <li>Année : <span class="bold">{{ car.year }}</span></li>
+                <li>Couleur : <span class="bold">{{ car.color }}</span></li>
+                <li>Prix journalier : <span class="bold">{{ car.dayprice|format_currency('EUR') }}</span></li>
+                <li>Prix de vente : <span class="bold">{{ car.buyprice|format_currency('EUR') }}</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="bottom">
+
+    </div>
+</div>
+</body>
+</html>

@@ -7,11 +7,12 @@ use App\Form\CarType;
 use App\Repository\CarsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 #[Route('app', 'app_')]
 class CarsController extends AbstractController
@@ -107,11 +108,48 @@ class CarsController extends AbstractController
     }
 
     #[Route('/voiture/supprimer/{id}', 'delete_car')]
-    public function delete(Cars $car, EntityManagerInterface $entityManager) {
+    public function delete(Cars $car, EntityManagerInterface $entityManager)
+    {
 
         $entityManager->remove($car);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_cars');
+    }
+
+
+    #[Route('/voiture/{id}/download')]
+    public function download(Cars $car)
+    {
+
+        $options = new Options();
+        $options->set('defaultFont', 'sans-serif');
+
+        $dompdf = new Dompdf($options);
+
+        $html = $this->renderView('download/cars.html.twig', [
+            'car' => $car
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->render();
+
+        $dompdf->stream('az.pdf', [
+            'Attachment' => false
+        ]);
+
+        return new Response('', 200, [
+            'Content-type' => 'application/pdf'
+        ]);
+    }
+
+    #[Route('/voiture/{id}/preview')]
+    public function preview(Cars $car)
+    {
+
+        return $this->render('download/cars.html.twig', [
+            'car' => $car
+        ]);
     }
 }

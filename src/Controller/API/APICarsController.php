@@ -23,7 +23,6 @@ class APICarsController extends AbstractController
         ]);
     }
 
-
     #[Route('car/{regNumber}')]
     public function show(string $regNumber, CarsRepository $carsRepository)
     {
