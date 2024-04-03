@@ -51,7 +51,7 @@ class CarType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => "5M", // test
+                        'maxSize' => "2M", // test
                         'mimeTypes' => [
                             'image/jpg',
                             'image/webp',
