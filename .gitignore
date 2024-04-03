@@ -7,8 +7,6 @@
 /var/
 /vendor/
 /.env
-.env
-.env.test
 ###< symfony/framework-bundle ###
 
 /node_modules/
