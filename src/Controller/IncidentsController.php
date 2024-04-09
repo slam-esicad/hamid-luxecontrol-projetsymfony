@@ -40,6 +40,8 @@ class IncidentsController extends AbstractController
 
             $entityManager->persist($incident);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_dashboard_incidents');
         }
 
         return $this->render('dashboard/create_incident.html.twig', [
