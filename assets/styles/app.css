@@ -67,7 +67,7 @@ form .login {
 
 .p_sidebar li {
     color: white !important;
-    margin: 10px 20px 10px 20px;
+    margin: 10px 20px 10px 20px; /* ok */
     list-style-type: none;
     font-size: 16px;
     font-family: "Inter", serif !important;
