@@ -33,7 +33,7 @@
                     <tr>
                         <td>{{ incident.id }}</td>
                         <td>{{ incident.subject }}</td>
-                        <td>{{ incident.message|u.truncate(20, '...') }}</td>
+                        <td>{{ incident.message|u.truncate(100, '...') }}</td>
                         <td><a href="{{ path('app_dashboard_edit_incident', {'id': incident.id}) }}"><i class="eye blue icon"></i></a> - <a href="{{ path('app_dashboard_delete_incident', {'id': incident.id}) }}"><i class="trash red icon"></i></a></td>
                     </tr>
                 {% endfor %}
