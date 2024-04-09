@@ -1,0 +1,36 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Modifier un signalement{% endblock %}
+
+
+{% block body %}
+
+    <div class="ui container">
+        <h3 class="ui header">
+            Modifier l'incident : {{ incident.subject }}
+        </h3>
+
+        <form method="POST" class="ui form">
+            {{ form_start(incidentForm) }}
+
+            <div class="field">
+                <label for="incidents_subject">Sujet</label>
+                {{ form_row(incidentForm.subject) }}
+            </div>
+
+            <div class="field">
+                <label for="incidents_message">Message</label>
+                {{ form_row(incidentForm.message) }}
+            </div>
+
+            <div class="field">
+                {{ form_row(incidentForm.submit, {
+                    'label': 'Modifier'
+                }) }}
+            </div>
+
+            {{ form_end(incidentForm) }}
+        </form>
+    </div>
+
+{% endblock %}

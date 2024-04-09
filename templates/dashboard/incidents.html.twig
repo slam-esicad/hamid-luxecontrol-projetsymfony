@@ -1,0 +1,46 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Gestion des incidents{% endblock %}
+
+
+{% block body %}
+
+    <div class="ui container">
+
+        <h3 class="ui header">
+            Liste des incidents
+        </h3>
+
+        <a href="{{ path('app_dashboard_create_incident') }}">
+
+            <button class="ui clr_bg button">
+                <i class="plus icon"></i>
+                Signaler un incident
+            </button>
+        </a>
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+                <tr class="tr-head">
+                    <th>#</th>
+                    <th>Sujet</th>
+                    <th>Message</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for incident in incidents %}
+                    <tr>
+                        <td>{{ incident.id }}</td>
+                        <td>{{ incident.subject }}</td>
+                        <td>{{ incident.message }}</td>
+                        <td><a href="{{ path('app_dashboard_edit_incident', {'id': incident.id}) }}"><i class="eye blue icon"></i></a> - <a href="{{ path('app_dashboard_delete_incident', {'id': incident.id}) }}"><i class="trash red icon"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

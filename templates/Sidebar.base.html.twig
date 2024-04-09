@@ -24,20 +24,22 @@
     <div class="ui inverted secondary pointing menu menu-top">
         <a class="title-top" href="{{ path('app_home') }}">Luxe Control</a>
     </div>
-    <a class="item" href="{{ path('app_dashboard') }}"> <span><i class="sidebaricon briefcase icon"></i> Dashboard</span></a>
-    <a class="item" href="{{ path('app_cars') }}"> <span><i class="sidebaricon car icon"></i> Voitures</span></a>
-    <a class="item" href="{{ path('app_customers') }}"> <span><i class="sidebaricon user icon"></i> Clients</span> </a>
-    <a class="item" href="{{ path('app_contracts') }}"> <span> <i class="sidebaricon folder icon"></i>Contrats</span> </a>
-    <a href="{{ path('app_statistics') }}" class="item"> <span><i class="sidebaricon chart pie icon"></i> Statistiques</span> </a>
-    <a href="{{ path('app_settings') }}" class="item"> <span> <i class="sidebaricon cog icon"></i>Règlages</span> </a>
-    <a class="item" href="{{ path('app_logout') }}"> <span><i class="sidebaricon sign-out icon"></i> Déconnexion</span> </a>
+    <ul>
+        <li><a class="it" href="{{ path('app_dashboard') }}"> <span><i class="sidebaricon briefcase icon"></i> Dashboard</span></a></li>
+        <li><a class="it" href="{{ path('app_cars') }}"> <span><i class="sidebaricon car icon"></i> Voitures</span></a></li>
+        <li><a class="it" href="{{ path('app_customers') }}"> <span><i class="sidebaricon user icon"></i> Clients</span> </a></li>
+        <li><a class="it" href="{{ path('app_contracts') }}"> <span> <i class="sidebaricon folder icon"></i>Contrats</span> </a></li>
+        <li><a href="{{ path('app_statistics') }}" class="it"> <span><i class="sidebaricon chart pie icon"></i> Statistiques</span> </a></li>
+        <li><a href="{{ path('app_settings') }}" class="it"> <span> <i class="sidebaricon cog icon"></i>Règlages</span> </a></li>
+        <li><a class="it" href="{{ path('app_logout') }}"> <span><i class="sidebaricon sign-out icon"></i> Déconnexion</span> </a></li>
+        <li><a href="{{ path('app_dashboard_incidents') }}"><span><i class="x icon icon"></i> Signaler</span></a></li>
+    </ul>
 </div>
 
 
 {% block body %}{% endblock %}
 
 {% block js %}
-    <script src="{{ asset('js/StatisticCAByMonthsChart.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/api.min.js"></script>
 {% endblock %}
 </body>

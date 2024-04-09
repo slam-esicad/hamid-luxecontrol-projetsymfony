@@ -37,9 +37,7 @@ body {
 .logo img {height: 200px;}
 .right {float: right;margin:0 !important;}
 .p_sidebar {padding-top:50px;}
-.p_sidebar a.item:hover {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-}
+
 .container {padding-left: 160px; padding-top: 30px; width: 85% !important;}
 form .login {
     width: 50%;
@@ -54,17 +52,36 @@ form .login {
     margin-right: 10px;
 }
 
-.p_sidebar .item {
+/*.p_sidebar .it {
     color: white !important;
     font-size: 16px;
     font-family: "Inter", serif !important;
-    margin: 0px 20px 0px 20px;
+    margin: 20px;
     padding: 13px 10px 13px 10px !important;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: 10px !important;
+}*/
+
+.p_sidebar ul {
+    padding: 0;margin: 0;
 }
 
-.p_sidebar .item i {
+.p_sidebar li {
+    color: white !important;
+    margin: 20px;
+    list-style-type: none;
+    font-size: 16px;
+    font-family: "Inter", serif !important;
+    padding: 13px 10px 13px 10px !important;
+    border-radius: 10px !important;
+}
+
+.p_sidebar a {color: white !important;}
+
+.p_sidebar li:hover {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.p_sidebar .it i {
     font-size: 17px !important;
 }
 
