@@ -85,9 +85,13 @@ class Cars
     #[Groups(['cars.index'])]
     private ?bool $selled = null;
 
+    #[ORM\OneToMany(targetEntity: Maintenances::class, mappedBy: 'car')]
+    private Collection $maintenances;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
+        $this->maintenances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -313,6 +317,36 @@ class Cars
     public function setSelled(bool $selled): static
     {
         $this->selled = $selled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Maintenances>
+     */
+    public function getMaintenances(): Collection
+    {
+        return $this->maintenances;
+    }
+
+    public function addMaintenance(Maintenances $maintenance): static
+    {
+        if (!$this->maintenances->contains($maintenance)) {
+            $this->maintenances->add($maintenance);
+            $maintenance->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaintenance(Maintenances $maintenance): static
+    {
+        if ($this->maintenances->removeElement($maintenance)) {
+            // set the owning side to null (unless already changed)
+            if ($maintenance->getCar() === $this) {
+                $maintenance->setCar(null);
+            }
+        }
 
         return $this;
     }

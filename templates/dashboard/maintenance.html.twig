@@ -1,0 +1,53 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Entretien : {% endblock %}
+
+
+
+{% block body %}
+
+    <div class="ui container">
+
+        <h1 class="header inika">Nouvel entretien pour : {{ car.brand.name ~ ' ' ~ car.model }}</h1>
+
+        <div class="ui form">
+            {{ form_start(maintenanceForm) }}
+
+            <div class="two fields">
+                <div class="field">
+                    <label>Type d'entretien</label>
+                    {{ form_row(maintenanceForm.maintenance_type) }}
+                </div>
+
+                <div class="field">
+                    <label>Prestataire</label>
+                    {{ form_row(maintenanceForm.provider) }}
+                </div>
+            </div>
+
+            <div class="three fields">
+                <div class="field">
+                    <label>Date</label>
+                    {{ form_row(maintenanceForm.date) }}
+                </div>
+                <div class="field">
+                    <label>Heure</label>
+                    {{ form_row(maintenanceForm.hour) }}
+                </div>
+            </div>
+
+            <div class="field">
+                {{ form_row(maintenanceForm.submit, {
+                    'label': 'Modifier',
+                    'attr': {
+                        'class': 'ui orange button'
+                    }
+                }) }}
+            </div>
+
+            {{ form_end(maintenanceForm) }}
+        </div>
+
+    </div>
+
+{% endblock %}

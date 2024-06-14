@@ -34,6 +34,7 @@
                 <th>Prix journalier</th>
                 <th>Prix de vente</th>
                 <th>Etat</th>
+                <th>Entretiens</th>
             </tr>
             </thead>
             <tbody>
@@ -50,6 +51,9 @@
                     <td>{{ car.dayprice|format_currency('EUR') }}</td>
                     <td>{{ car.buyprice|format_currency('EUR') }}</td>
                     <td>{{ car.selled ? 'Vendue' : '' }}</td>
+                    <td class="center aligned card"><a href="{{ path('app_maintenances', {
+                            'car': car.id
+                        }) }}"><i class="orange wrench icon"></i></a></td>
 
                 </tr>
             {% endfor %}

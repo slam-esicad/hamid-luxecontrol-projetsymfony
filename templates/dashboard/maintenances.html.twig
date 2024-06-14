@@ -1,0 +1,63 @@
+{% extends 'Sidebar.base.html.twig' %}
+
+{% block title %}Liste des voitures{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="ui container">
+
+        {% for msg in app.flashes('success') %}
+            {{ component('Alert', {type: 'success', text: msg}) }}
+        {% endfor %}
+
+        {% for msg in app.flashes('error') %}
+            {{ component('Alert', {type: 'error', text: msg}) }}
+        {% endfor %}
+
+        <h1 class="header inika">Liste des entretiens pour la voiture : {{ car.brand.name ~ ' ' ~ car.model }}</h1>
+
+        <p>{{ maintenances|length }} entretiens au total</p>
+
+        <a href="{{ path('app_create_maintenance', {
+            id: car.id
+        }) }}">
+            <button class="ui clr_bg button">
+                <i class="plus icon"></i>
+                Nouvel
+            </button>
+        </a>
+
+        <br><br>
+
+        <table class="ui celled table">
+            <thead class="tr-head">
+            <tr class="tr-head">
+                <th>Action</th>
+                <th>Type d'entretien</th>
+                <th>Prestataire</th>
+                <th>Voiture</th>
+                <th>Date et heure</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for maintenance in maintenances %}
+                <tr {{ car.selled ? 'style="background-color: #ce8388;"' : '' }}>
+                    <td class="center aligned card">
+                        <a href="{{ path('app_show_maintenance', {'id': maintenance.id}) }}"><i class="blue eye icon"></i></a> -
+                        <a href="{{ path('app_maintenance_delete', {'id': maintenance.id}) }}"><i class="red trash icon"></i></a>
+                    </td>
+
+                    <td>{{ maintenance.maintenanceType }}</td>
+                    <td>{{ maintenance.provider }}</td>
+                    <td>{{ maintenance.car.brand.name }}</td>
+                    <td>{{ maintenance.date|date('d / m / Y') }} à {{ maintenance.hour|date('H') ~ ' h' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+    </div>
+
+{% endblock %}
